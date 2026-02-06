@@ -1,60 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Temporary Utopia — Marketing Site
 
-## Getting Started
+Conversion-first single-page site built with Next.js (App Router), Tailwind, shadcn/ui, Framer Motion, and Supabase.
 
-First, run the development server:
+## Quick start
+- Install deps: `pnpm install`
+- Copy envs: `cp .env.example .env` and fill `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`
+- Run dev server: `pnpm dev`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Scripts
+- `pnpm dev` — run Next dev server
+- `pnpm lint` — lint with Next ESLint preset
+- `pnpm typecheck` — TypeScript no-emit
+- `pnpm build` — production build
 
-# TUWeb
-# Temporary Utopia — Website (Codex Build)
-Conversion-first, single-page marketing site built with Next.js App Router.
+## Environment
+- `NEXT_PUBLIC_SITE_URL` — base URL (used for meta)
+- `SUPABASE_URL` — Supabase project URL
+- `SUPABASE_SERVICE_ROLE_KEY` — service role key (server-only; never expose to client)
 
+## API contracts
+- `POST /api/leads` — Zod-validated lead intake insert into `leads`
+- `POST /api/insights` — Zod-validated email upsert into `insights_subscribers`
 
-## Stack
-- Next.js (App Router) + TypeScript
-- TailwindCSS
-- shadcn/ui
-- Framer Motion
-- Supabase (Postgres) for lead + subscriber storage
+Both endpoints include honeypot + basic IP rate limiting and use the Supabase service client on the server.
 
+## Database
+Supabase migrations live in `supabase/migrations`:
+- `leads` table
+- `insights_subscribers` table
+Both have RLS enabled with service-role insert/update policies only.
 
-## Local Setup
-### 1) Install dependencies
-> Preferred package manager: **pnpm**
+## Structure (key paths)
+- `src/app/(marketing)/page.tsx` — single-page marketing experience
+- `src/content/*` — data-driven content modules
+- `src/components/sections/*` — Lead Intake + Insights forms
+- `src/app/api/*` — API route handlers
+- `src/lib/*` — env, supabase client, validators, analytics stub
+- `src/components/reactbits/` — hero effect scaffold
 
-
-```bash
-pnpm install
-
-
-
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+- Design theme: premium dark with Miami F1 blue/pink accents.
+- Lead Intake is 2-step with client-side Zod validation, success/error states, and honeypot field.
+- Insights signup is lightweight and reuseable (`<InsightsSignup compact />` supported).
+- If `next build` warns about inferring workspace root because of `/Users/finlaysturzaker/package-lock.json`, you can safely remove that file if it is not needed; the project itself uses pnpm with its own lockfile.
