@@ -43,3 +43,4 @@ Both have RLS enabled with service-role insert/update policies only.
 - Lead Intake is 2-step with client-side Zod validation, success/error states, and honeypot field.
 - Insights signup is lightweight and reuseable (`<InsightsSignup compact />` supported).
 - If `next build` warns about inferring workspace root because of `/Users/finlaysturzaker/package-lock.json`, you can safely remove that file if it is not needed; the project itself uses pnpm with its own lockfile.
+

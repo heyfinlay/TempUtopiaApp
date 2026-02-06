@@ -2,12 +2,11 @@ import "server-only"
 
 import { createClient } from "@supabase/supabase-js"
 
-import { env } from "./env"
-
-const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
-  auth: { autoRefreshToken: false, persistSession: false },
-})
+import { getServerEnv } from "./env"
 
 export function getSupabaseServerClient() {
-  return supabase
+  const env = getServerEnv()
+  return createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  })
 }
