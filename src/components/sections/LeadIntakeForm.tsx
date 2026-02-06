@@ -18,7 +18,7 @@ type FormState = {
 }
 
 const employeesOptions = ["1-5", "6-15", "16-50", "51-200", "200+"]
-const spendOptions = ["< $10k/mo", "$10k-25k/mo", "$25k-75k/mo", "$75k-150k/mo", "$150k+/mo"]
+const spendOptions = ["$0–3k / mo", "$3–10k / mo", "$10–25k / mo", "$25–75k / mo", "$75k+ / mo"]
 const servicesOptions = [
   "Lead Capture System",
   "Follow-Up Automation",
@@ -168,14 +168,14 @@ export function LeadIntakeForm() {
       {state.step === 1 ? (
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="business_name">Business name *</Label>
-            <Input
-              id="business_name"
-              value={state.data.business_name}
-              onChange={(e) => updateField("business_name", e.target.value)}
-              aria-invalid={Boolean(state.errors.business_name)}
-              placeholder="e.g., Volt Mobility"
-            />
+              <Label htmlFor="business_name">Business name *</Label>
+              <Input
+                id="business_name"
+                value={state.data.business_name}
+                onChange={(e) => updateField("business_name", e.target.value)}
+                aria-invalid={Boolean(state.errors.business_name)}
+                placeholder="e.g., Volt Mobility"
+              />
             {state.errors.business_name ? (
               <p className="text-xs text-red-600">{state.errors.business_name}</p>
             ) : null}
@@ -270,7 +270,7 @@ export function LeadIntakeForm() {
                 id="industry"
                 value={state.data.industry}
                 onChange={(e) => updateField("industry", e.target.value)}
-                placeholder="e.g., Consumer SaaS"
+                placeholder="e.g., Clinic, Trades, Agency, Coaching, Local service, Ecommerce"
               />
             </div>
           </div>
@@ -383,6 +383,9 @@ export function LeadIntakeForm() {
               {state.status === "submitting" ? "Submitting..." : "Submit application"}
             </Button>
           </div>
+          <p className="text-xs text-slate-600">
+            Takes ~60 seconds. We reply within 1 business day. No spam.
+          </p>
         </div>
       ) : null}
     </form>
@@ -398,4 +401,15 @@ function mapZodErrors(error: z.ZodError<Record<string, unknown>>) {
     }
   }
   return errors
+}
+
+export function focusLeadForm() {
+  if (typeof document === "undefined") return
+  const el = document.getElementById("business_name") as HTMLInputElement | null
+  if (el) {
+    el.focus({ preventScroll: true })
+    el.scrollIntoView({ behavior: "smooth", block: "start" })
+    return
+  }
+  document.getElementById("cta")?.scrollIntoView({ behavior: "smooth", block: "start" })
 }

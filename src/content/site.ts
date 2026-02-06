@@ -1,14 +1,11 @@
 export const siteNav = [
-  { label: "Overview", href: "#hero" },
-  { label: "Proof", href: "#proof" },
+  { label: "Results", href: "#proof" },
   { label: "Problem", href: "#problem" },
-  { label: "What We Do", href: "#what-we-do" },
+  { label: "What We Build", href: "#what-we-do" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "What You Get", href: "#what-you-get" },
-  { label: "Who It's For", href: "#who-for" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
-  { label: "Get Started", href: "#cta" },
+  { label: "Book Audit", href: "#cta" },
 ]
 
 export const heroContent = {
@@ -37,7 +34,14 @@ export const problemSection = {
     "People say “I’ll think about it” and vanish",
     "Booking links aren’t sent fast enough",
   ],
-  closing: "We fix that.",
+  closing: "System Promise",
+  guarantees: [
+    "Instant first response for every lead",
+    "Timed follow-ups so no one slips through",
+    "Booking link sent at the right moment",
+    "Simple pipeline visibility (know who needs attention)",
+  ],
+  miniFlow: "DM/Form → Qualify → Booked Call",
 }
 
 export const modules = [

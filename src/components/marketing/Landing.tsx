@@ -1,5 +1,6 @@
 "use client"
 
+import type { MouseEvent } from "react"
 import { motion } from "framer-motion"
 import { Check, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -18,7 +19,7 @@ import {
   whoFor,
 } from "@/content/site"
 import { pricing } from "@/content/pricing"
-import { LeadIntakeForm } from "@/components/sections/LeadIntakeForm"
+import { LeadIntakeForm, focusLeadForm } from "@/components/sections/LeadIntakeForm"
 import { InsightsSignup } from "@/components/sections/InsightsSignup"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -30,6 +31,28 @@ const accent = "text-emerald-700"
 const accentBg = "bg-emerald-600 hover:bg-emerald-700"
 
 export function Landing() {
+  const handlePrimaryCta = (e?: MouseEvent) => {
+    e?.preventDefault()
+    document.getElementById("cta")?.scrollIntoView({ behavior: "smooth", block: "start" })
+    focusLeadForm()
+  }
+
+  const handleSecondaryCta = (e?: MouseEvent) => {
+    e?.preventDefault()
+    document.getElementById("what-we-do")?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+
+  const handleNavClick = (e: MouseEvent, href: string) => {
+    if (href === "#cta") {
+      handlePrimaryCta(e)
+      return
+    }
+    if (href.startsWith("#")) {
+      e.preventDefault()
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-sm">
@@ -40,7 +63,12 @@ export function Landing() {
           </div>
           <div className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
             {siteNav.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-slate-900 transition-colors">
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="hover:text-slate-900 transition-colors"
+              >
                 {item.label}
               </a>
             ))}
@@ -50,7 +78,9 @@ export function Landing() {
               <Link href="#what-we-do">See What We Build</Link>
             </Button>
             <Button asChild size="sm" className={`${accentBg} text-white shadow-sm`}>
-              <Link href="#cta">Book a Free Audit</Link>
+              <Link href="#cta" onClick={handlePrimaryCta}>
+                Book a Free Audit
+              </Link>
             </Button>
           </div>
         </nav>
@@ -61,7 +91,7 @@ export function Landing() {
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(16,185,129,0.08),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(15,23,42,0.05),transparent_32%)]" />
           </div>
-          <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+          <div className="relative mx-auto max-w-5xl space-y-8 px-4 sm:px-6 lg:px-8">
             <div className="space-y-6">
               <Badge variant="outline" className="border-emerald-200 bg-white text-emerald-700">
                 {heroContent.eyebrow}
@@ -75,65 +105,26 @@ export function Landing() {
                 >
                   {heroContent.title}
                 </motion.h1>
-                <p className="text-lg text-slate-600 max-w-2xl">{heroContent.subtitle}</p>
+                <p className="text-lg text-slate-600 max-w-3xl">{heroContent.subtitle}</p>
                 <p className="text-sm text-slate-500">{heroContent.trustLine}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Button asChild className={`${accentBg} text-white shadow-sm`}>
-                  <Link href={heroContent.primaryCta.href}>{heroContent.primaryCta.label}</Link>
+                <Button onClick={handlePrimaryCta} className={`${accentBg} text-white shadow-sm`}>
+                  {heroContent.primaryCta.label}
                 </Button>
-                <Button asChild variant="outline" className="border-slate-200 text-slate-900">
-                  <Link href={heroContent.secondaryCta.href}>{heroContent.secondaryCta.label}</Link>
+                <Button variant="outline" className="border-slate-200 text-slate-900" onClick={handleSecondaryCta}>
+                  {heroContent.secondaryCta.label}
                 </Button>
-              </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                {heroContent.stats.map((stat) => (
-                  <Card key={stat.label} className="border-slate-200 bg-white shadow-sm">
-                    <CardHeader className="px-5">
-                      <CardTitle className={`text-2xl font-semibold ${accent}`}>{stat.value}</CardTitle>
-                      <CardDescription className="text-slate-600">{stat.label}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                ))}
               </div>
             </div>
-            <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15, duration: 0.5 }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-100"
-              >
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <div className="space-y-1">
-                    <p className="text-sm text-slate-500">Workflow preview</p>
-                    <p className="font-semibold text-slate-900">Decision clarity in one scroll</p>
-                  </div>
-                  <div className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                    Live build
-                  </div>
-                </div>
-                <div className="mt-4 grid gap-3">
-                  {["Message", "Proof", "Next step"].map((label, idx) => (
-                    <div key={label} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3">
-                      <div className="mt-1 flex size-8 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold text-slate-700">
-                        {idx + 1}
-                      </div>
-                      <div className="space-y-1">
-                        <p className="font-semibold text-slate-900">{label}</p>
-                        <p className="text-sm text-slate-600">
-                          {idx === 0 && "Benefit-first headline and subcopy tuned to your ICP."}
-                          {idx === 1 && "Logos, metrics, and objections answered near the CTA."}
-                          {idx === 2 && "Primary CTA above the fold with a calm secondary path."}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="rounded-xl border border-dashed border-emerald-200 bg-emerald-50/60 px-4 py-3 text-sm text-emerald-800">
-                    Modular layout ready for A/B: swap hero, proof, or FAQ without a rebuild.
-                  </div>
-                </div>
-              </motion.div>
+            <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+              {proofStrip.map((item) => (
+                <Card key={item} className="border-slate-200 bg-white shadow-sm">
+                  <CardHeader className="py-4">
+                    <CardTitle className="text-base font-semibold text-slate-900">{item}</CardTitle>
+                  </CardHeader>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -172,8 +163,20 @@ export function Landing() {
                 </CardContent>
               </Card>
               <Card className="border-emerald-200 bg-emerald-50 shadow-sm">
-                <CardContent className="flex h-full items-center justify-center text-emerald-800 font-medium pt-6">
-                  {problemSection.closing}
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-emerald-800">{problemSection.closing}</CardTitle>
+                  <CardDescription className="text-sm text-emerald-700">What every system guarantees</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {problemSection.guarantees.map((item) => (
+                    <div key={item} className="flex gap-2 text-sm text-emerald-800">
+                      <Check className="mt-0.5 size-4" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                  <div className="mt-3 rounded-lg border border-emerald-200 bg-white px-3 py-2 text-xs font-medium text-emerald-800">
+                    {problemSection.miniFlow}
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -291,6 +294,7 @@ export function Landing() {
                     <CardTitle className="text-slate-900">{tier.name}</CardTitle>
                     <CardDescription className={`text-lg font-semibold ${accent}`}>{tier.setup}</CardDescription>
                     <CardDescription className="text-slate-600">{tier.description}</CardDescription>
+                    <p className="text-sm font-medium text-slate-700">{tier.bestFor}</p>
                   </CardHeader>
                   <CardContent className="space-y-2">
                     {tier.includes.map((item) => (
@@ -299,8 +303,8 @@ export function Landing() {
                         <span>{item}</span>
                       </div>
                     ))}
-                    <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
-                      Optional: {tier.optional}
+                    <div className="rounded-lg border border-slate-300 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+                      Optional ongoing support: {tier.optional}
                     </div>
                   </CardContent>
                 </Card>
