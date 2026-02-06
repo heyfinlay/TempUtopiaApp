@@ -14,6 +14,30 @@ pnpm dev
 bun dev
 ```
 
+# TUWeb
+# Temporary Utopia — Website (Codex Build)
+Conversion-first, single-page marketing site built with Next.js App Router.
+
+
+## Stack
+- Next.js (App Router) + TypeScript
+- TailwindCSS
+- shadcn/ui
+- Framer Motion
+- Supabase (Postgres) for lead + subscriber storage
+
+
+## Local Setup
+### 1) Install dependencies
+> Preferred package manager: **pnpm**
+
+
+```bash
+pnpm install
+
+
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
