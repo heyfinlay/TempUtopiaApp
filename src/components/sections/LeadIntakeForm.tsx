@@ -1,9 +1,7 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { z } from "zod"
-
-import { services } from "@/content/services"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,6 +19,14 @@ type FormState = {
 
 const employeesOptions = ["1-5", "6-15", "16-50", "51-200", "200+"]
 const spendOptions = ["< $10k/mo", "$10k-25k/mo", "$25k-75k/mo", "$75k-150k/mo", "$150k+/mo"]
+const servicesOptions = [
+  "Lead Capture System",
+  "Follow-Up Automation",
+  "Booking + Reminders",
+  "CRM / Pipeline Visibility",
+  "Multi-Channel (Email/SMS/DM)",
+  "Not sure (need audit)",
+]
 
 const initialData: LeadFormInput = {
   business_name: "",
@@ -46,8 +52,6 @@ export function LeadIntakeForm() {
     step: 1,
     status: "idle",
   })
-
-  const servicesList = useMemo(() => services.map((s) => s.name), [])
 
   const updateField = <K extends keyof LeadFormInput>(key: K, value: LeadFormInput[K]) => {
     setState((prev) => ({ ...prev, data: { ...prev.data, [key]: value }, errors: { ...prev.errors, [key]: undefined } }))
@@ -124,21 +128,21 @@ export function LeadIntakeForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-slate-300">
+        <div className="flex items-center gap-2 text-sm text-slate-600">
           <span
             className={cn(
-              "size-8 rounded-full border border-white/20 flex items-center justify-center",
-              state.step === 1 ? "bg-white/10 text-white" : "bg-black/50 text-slate-300"
+              "size-8 rounded-full border flex items-center justify-center",
+              state.step === 1 ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-slate-200 bg-white text-slate-600"
             )}
           >
             1
           </span>
           <span>Company</span>
-          <div className="h-px w-12 bg-white/15" />
+          <div className="h-px w-12 bg-slate-200" />
           <span
             className={cn(
-              "size-8 rounded-full border border-white/20 flex items-center justify-center",
-              state.step === 2 ? "bg-white/10 text-white" : "bg-black/50 text-slate-300"
+              "size-8 rounded-full border flex items-center justify-center",
+              state.step === 2 ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-slate-200 bg-white text-slate-600"
             )}
           >
             2
@@ -146,17 +150,17 @@ export function LeadIntakeForm() {
           <span>Contact</span>
         </div>
         {state.status === "success" ? (
-          <span className="text-sm text-emerald-300">Submitted</span>
+          <span className="text-sm text-emerald-700">Submitted</span>
         ) : null}
       </div>
 
       {state.status === "success" ? (
-        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-100 text-sm">
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 text-sm">
           {state.message}
         </div>
       ) : null}
       {state.status === "error" ? (
-        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-100 text-sm">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-800 text-sm">
           {state.message}
         </div>
       ) : null}
@@ -173,7 +177,7 @@ export function LeadIntakeForm() {
               placeholder="e.g., Volt Mobility"
             />
             {state.errors.business_name ? (
-              <p className="text-xs text-red-300">{state.errors.business_name}</p>
+              <p className="text-xs text-red-600">{state.errors.business_name}</p>
             ) : null}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -188,8 +192,8 @@ export function LeadIntakeForm() {
                     className={cn(
                       "rounded-md border px-3 py-2 text-sm transition-colors",
                       state.data.employees_range === option
-                        ? "border-sky-400/70 bg-sky-400/10 text-white"
-                        : "border-white/10 bg-white/5 text-slate-200 hover:border-white/20"
+                        ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                        : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     )}
                   >
                     {option}
@@ -197,7 +201,7 @@ export function LeadIntakeForm() {
                 ))}
               </div>
               {state.errors.employees_range ? (
-                <p className="text-xs text-red-300">{state.errors.employees_range}</p>
+                <p className="text-xs text-red-600">{state.errors.employees_range}</p>
               ) : null}
             </div>
             <div className="space-y-2">
@@ -211,8 +215,8 @@ export function LeadIntakeForm() {
                     className={cn(
                       "rounded-md border px-3 py-2 text-sm transition-colors",
                       state.data.ad_spend_range === option
-                        ? "border-pink-400/70 bg-pink-400/10 text-white"
-                        : "border-white/10 bg-white/5 text-slate-200 hover:border-white/20"
+                        ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                        : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     )}
                   >
                     {option}
@@ -220,14 +224,14 @@ export function LeadIntakeForm() {
                 ))}
               </div>
               {state.errors.ad_spend_range ? (
-                <p className="text-xs text-red-300">{state.errors.ad_spend_range}</p>
+                <p className="text-xs text-red-600">{state.errors.ad_spend_range}</p>
               ) : null}
             </div>
           </div>
           <div className="space-y-2">
             <Label>Services interested *</Label>
             <div className="flex flex-wrap gap-2">
-              {servicesList.map((service) => {
+              {servicesOptions.map((service) => {
                 const active = state.data.services_interested.includes(service)
                 return (
                   <button
@@ -237,8 +241,8 @@ export function LeadIntakeForm() {
                     className={cn(
                       "rounded-full border px-4 py-2 text-sm transition-colors",
                       active
-                        ? "border-sky-400/70 bg-sky-400/15 text-white shadow-[0_0_24px_rgba(56,189,248,0.45)]"
-                        : "border-white/10 bg-white/5 text-slate-200 hover:border-white/20"
+                        ? "border-emerald-300 bg-emerald-50 text-emerald-800 shadow-[0_0_10px_rgba(16,185,129,0.25)]"
+                        : "border-slate-200 bg-white text-slate-700 hover:border-slate-300"
                     )}
                   >
                     {service}
@@ -247,7 +251,7 @@ export function LeadIntakeForm() {
               })}
             </div>
             {state.errors.services_interested ? (
-              <p className="text-xs text-red-300">{state.errors.services_interested}</p>
+              <p className="text-xs text-red-600">{state.errors.services_interested}</p>
             ) : null}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -271,7 +275,7 @@ export function LeadIntakeForm() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="button" onClick={nextStep} className="bg-gradient-to-r from-sky-400 to-pink-500 text-black">
+            <Button type="button" onClick={nextStep} className="bg-emerald-600 text-white hover:bg-emerald-700">
               Next
             </Button>
           </div>
@@ -291,7 +295,7 @@ export function LeadIntakeForm() {
                 placeholder="Your name"
               />
               {state.errors.contact_name ? (
-                <p className="text-xs text-red-300">{state.errors.contact_name}</p>
+                <p className="text-xs text-red-600">{state.errors.contact_name}</p>
               ) : null}
             </div>
             <div className="space-y-2">
@@ -304,7 +308,7 @@ export function LeadIntakeForm() {
                 aria-invalid={Boolean(state.errors.email)}
                 placeholder="you@company.com"
               />
-              {state.errors.email ? <p className="text-xs text-red-300">{state.errors.email}</p> : null}
+              {state.errors.email ? <p className="text-xs text-red-600">{state.errors.email}</p> : null}
             </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -336,7 +340,7 @@ export function LeadIntakeForm() {
                 onChange={(e) => updateField("website_url", e.target.value)}
                 placeholder="https://"
               />
-              {state.errors.website_url ? <p className="text-xs text-red-300">{state.errors.website_url}</p> : null}
+              {state.errors.website_url ? <p className="text-xs text-red-600">{state.errors.website_url}</p> : null}
             </div>
             <div className="space-y-2">
               <Label htmlFor="honeypot" className="sr-only">
@@ -367,14 +371,14 @@ export function LeadIntakeForm() {
               type="button"
               variant="outline"
               onClick={() => setState((prev) => ({ ...prev, step: 1 }))}
-              className="border-white/20 text-white hover:bg-white/10"
+              className="border-slate-200 text-slate-900"
             >
               Back
             </Button>
             <Button
               type="submit"
               disabled={state.status === "submitting"}
-              className="bg-gradient-to-r from-sky-400 to-pink-500 text-black shadow-lg shadow-pink-500/30"
+              className="bg-emerald-600 text-white hover:bg-emerald-700"
             >
               {state.status === "submitting" ? "Submitting..." : "Submit application"}
             </Button>

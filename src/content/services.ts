@@ -7,33 +7,21 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    name: "Landing Systems",
-    summary: "Composable hero, offer, proof, and objection modules tuned for paid traffic.",
-    outcomes: [
-      "Speed-to-ship: new variants in days, not weeks",
-      "On-page storytelling aligned to top channels",
-      "Structured experiment backlog with reporting",
-    ],
-    tag: "Build",
+    name: "Lead Capture System",
+    summary: "Collect every lead from DMs, forms, messages, and email without manual work.",
+    outcomes: ["Instagram + Facebook DM capture", "Website and email ingestion", "Centralized lead log with source tags"],
+    tag: "Capture",
   },
   {
-    name: "Creative Sprints",
-    summary: "High-intent hooks, motion-first assets, and offer positioning mapped to funnel stages.",
-    outcomes: [
-      "Angle matrix with 6–10 active themes",
-      "Platform-native ad sets with rapid refresh",
-      "Performance design kit for your team",
-    ],
-    tag: "Scale",
+    name: "Follow-Up Automation",
+    summary: "Human-feeling replies and sequences that keep leads warm and move them forward.",
+    outcomes: ["Instant replies and qualification", "Timed reminders and nudges", "Re-engagement when people go quiet"],
+    tag: "Follow Up",
   },
   {
-    name: "Media & Measurement",
-    summary: "Full-funnel media ops with clean data, pacing, and attribution sanity checks.",
-    outcomes: [
-      "Spend allocation by MER and LTV/CAC guardrails",
-      "Pixel & conversion APIs hardened",
-      "Weekly experiment reviews with clear next bets",
-    ],
-    tag: "Operate",
+    name: "Booking + Close",
+    summary: "Guided booking flows with visibility so you know what’s converting.",
+    outcomes: ["Calendar booking + confirmations", "Lead tracking and status updates", "Pipeline view you can share"],
+    tag: "Book",
   },
 ]

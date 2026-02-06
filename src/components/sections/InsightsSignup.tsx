@@ -78,7 +78,7 @@ export function InsightsSignup({ compact = false }: { compact?: boolean }) {
         <Button
           type="submit"
           disabled={status === "submitting"}
-          className="sm:w-fit bg-gradient-to-r from-sky-400 to-pink-500 text-black shadow-lg shadow-pink-500/30"
+          className="sm:w-fit bg-emerald-600 text-white hover:bg-emerald-700"
         >
           {status === "submitting" ? "Sending..." : "Join"}
         </Button>

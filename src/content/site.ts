@@ -1,132 +1,117 @@
 export const siteNav = [
-  { label: "Hero", href: "#hero" },
-  { label: "Journey", href: "#journey" },
+  { label: "Overview", href: "#hero" },
+  { label: "Proof", href: "#proof" },
   { label: "Problem", href: "#problem" },
-  { label: "Approach", href: "#approach" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Trust", href: "#trust" },
-  { label: "Conversion", href: "#conversion" },
+  { label: "What We Do", href: "#what-we-do" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "What You Get", href: "#what-you-get" },
+  { label: "Who It's For", href: "#who-for" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Get Started", href: "#cta" },
 ]
 
 export const heroContent = {
   eyebrow: "Temporary Utopia",
-  title: "Performance brand studio for teams that need lift, not fluff.",
+  title: "Turn leads into booked calls — automatically.",
   subtitle:
-    "We build high-velocity funnels, creative and media systems that turn paid spend into predictable pipeline.",
-  primaryCta: { label: "Book a call", href: "#conversion" },
-  secondaryCta: { label: "Apply for build", href: "#conversion" },
+    "Temporary Utopia builds simple AI-powered systems that capture, follow up, and close leads from your DMs, website, and inbox — without needing a VA or complicated tech.",
+  trustLine: "Built for service businesses, coaches, and teams who already get leads — but lose them in the follow-up.",
+  primaryCta: { label: "Book a Free Audit", href: "#cta" },
+  secondaryCta: { label: "See What We Build", href: "#what-we-do" },
   stats: [
-    { label: "Avg. CAC reduction", value: "28%" },
-    { label: "Lift in MER", value: "1.6x" },
-    { label: "Ships per month", value: "12–18 experiments" },
+    { label: "Faster lead response", value: "Minutes, not hours" },
+    { label: "Less ghosting", value: "Consistent follow-up" },
+    { label: "More booked calls", value: "+% you can see" },
   ],
 }
 
-export const heroPlaybook = {
-  title: "Conversion Playbook",
-  subtitle: "Prototype → Ship → Scale",
-}
+export const proofStrip = ["Faster lead response", "Less ghosting", "More booked calls", "Less admin work"]
 
-export const journeySteps = [
-  {
-    title: "Diagnose",
-    body: "We map your funnel, creative, and data layer in week 1 to isolate the highest-leverage constraints.",
-  },
-  {
-    title: "Design",
-    body: "We prototype the offer, landing, and creative angles with motion-first visuals and clear proof.",
-  },
-  {
-    title: "Deploy",
-    body: "We ship fast to production: landing v1, ad sets, creative, analytics guardrails.",
-  },
-  {
-    title: "Dial in",
-    body: "Weekly experiments, creative refresh, and cadence calls to keep growth compounding.",
-  },
-]
-
-export const journeyContent = {
-  eyebrow: "The Journey",
-  title: "From audit to compounding lift",
-  subtitle: "Four steps. Clear owners. Weekly momentum so you always know what shipped and what's next.",
-}
-
-export const problems = [
-  "Rising CAC with stagnant LTV and fatigued creative.",
-  "Landing pages that look pretty but don't tell a story visitors can say yes to.",
-  "Fragmented data across ad platforms, making attribution guesswork.",
-  "Agencies that over-promise, under-ship, and hide behind vanity metrics.",
-]
-
-export const problemContent = {
-  eyebrow: "The Problem",
-  title: "Why growth stalls",
-  subtitle:
-    "Teams pour spend into channels without the narrative, proof, or systems to convert. We fix the plumbing before turning up volume.",
-}
-
-export const approach = [
-  {
-    title: "Conversion-first creative",
-    detail:
-      "Narratives built from customer proofs, not stock aesthetics. Every block has a job: build trust, reduce risk, drive action.",
-  },
-  {
-    title: "Systems, not campaigns",
-    detail:
-      "Reusable modules for hero, offer, social proof, and objection handling. Easy to A/B without replatforming.",
-  },
-  {
-    title: "Operational cadence",
-    detail:
-      "Weekly standups, experiment backlog, and transparent reporting so your team can see what ships and why.",
-  },
-]
-
-export const approachContent = {
-  eyebrow: "Method",
-  title: "How we work with you",
-  subtitle:
-    "Embedded collaboration, transparent dashboards, and experiments tied to business outcomes—not vanity metrics.",
-}
-
-export const trustContent = {
-  title: "Process you can see",
-  subtitle:
-    "We operate transparently: weekly commits, dashboards, and Slack check-ins so you never wonder what's shipping.",
-  process: [
-    "Weekly delivery rhythm with clear owners and deadlines.",
-    "Source-of-truth dashboard for experiments, learnings, and next bets.",
-    "Embedded with your team in Slack for async momentum.",
+export const problemSection = {
+  title: "Leads don’t disappear — they leak.",
+  bullets: [
+    "DMs go unanswered",
+    "Enquiries get forgotten",
+    "Follow-ups don’t happen",
+    "People say “I’ll think about it” and vanish",
+    "Booking links aren’t sent fast enough",
   ],
-  testimonialsEyebrow: "Signals of trust",
+  closing: "We fix that.",
 }
 
-export const servicesContent = {
-  eyebrow: "Services",
-  title: "What we build & run",
-  subtitle: "Modular services you can layer based on growth stage. Start with a sprint, extend into ongoing ops.",
+export const modules = [
+  {
+    title: "Capture",
+    description: "Automatically collect leads from:",
+    bullets: ["Instagram DMs", "Website forms", "Facebook messages", "Email enquiries"],
+  },
+  {
+    title: "Follow Up",
+    description: "Smart follow-up that feels human:",
+    bullets: ["instant replies", "qualification questions", "reminders", "re-engagement sequences"],
+  },
+  {
+    title: "Book + Close",
+    description: "Turn interest into action:",
+    bullets: ["calendar booking flows", "confirmation + reminders", "lead tracking", "pipeline visibility"],
+  },
+]
+
+export const process = [
+  {
+    title: "Audit",
+    detail: "We map your current lead flow and show you exactly where money is leaking.",
+  },
+  {
+    title: "Build",
+    detail: "We install your automation system using the tools you already use (or the best ones for the job).",
+  },
+  {
+    title: "Launch + Optimize",
+    detail: "You get a clean handover, a Loom walkthrough, and ongoing improvements if you want to scale.",
+  },
+]
+
+export const whatYouGet = {
+  title: "What we build for you",
+  intro: "Depending on your business, your system can include:",
+  bullets: [
+    "DM automation (Instagram + Facebook)",
+    "follow-up sequences (email + SMS)",
+    "booking flows (Calendly/SavvyCal)",
+    "lead qualification forms",
+    "CRM tracking (Notion / Sheets / HubSpot)",
+    "FAQ response logic",
+    "custom scripts tailored to your offer",
+    "a simple dashboard so you can see what’s happening",
+  ],
 }
 
-export const portfolioContent = {
-  eyebrow: "Portfolio",
-  title: "Recent builds",
-  subtitle: "Evidence over hype. A few recent outcomes from sprints.",
+export const whoFor = {
+  title: "Built for businesses who already get attention.",
+  for: [
+    "you get DMs or enquiries each week",
+    "you’re already selling something real",
+    "you know leads are slipping through the cracks",
+    "you want more booked calls without hiring admin",
+  ],
+  notFor: [
+    "you have no leads at all yet",
+    "you’re still figuring out what you sell",
+    "you want “content posting” or social media management",
+  ],
 }
 
-export const conversionBlock = {
-  title: "Ready to see lift?",
+export const finalCta = {
+  title: "Stop losing money in your inbox.",
   subtitle:
-    "Tell us about your growth goals. We’ll review fit within 24 hours and send a calendar link.",
-  leadCta: "Apply for a build sprint",
-  callCta: "Book a call",
-  calloutDescription: "Prefer to talk it through? Share context and we’ll send a calendar link with a short agenda.",
-  insightsTitle: "Get the Insights drop",
-  insightsSubtitle: "Monthly breakdowns on creative, media, and landing tests that actually moved numbers.",
+    "If you’re already getting leads, we’ll help you capture them, follow up properly, and turn them into booked calls.",
+  primaryCta: { label: "Book a Free Audit", href: "#cta" },
+  secondaryCta: { label: "See What We Build", href: "#what-we-do" },
+  assurance: "No pressure. If you’re not a fit, I’ll tell you straight.",
 }
 
 export const footerContent = {
-  tagline: "Built for teams that need lift, not fluff.",
+  tagline: "AI-powered lead systems that turn DMs and enquiries into booked calls.",
 }
