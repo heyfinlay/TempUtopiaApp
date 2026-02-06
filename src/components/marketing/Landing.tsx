@@ -14,6 +14,7 @@ import {
   problemSection,
   process,
   proofStrip,
+  proofSupporting,
   siteNav,
   whatYouGet,
   whoFor,
@@ -126,6 +127,11 @@ export function Landing() {
                 </Card>
               ))}
             </div>
+            {proofSupporting ? (
+              <p className="text-sm text-slate-500 max-w-3xl">
+                {proofSupporting}
+              </p>
+            ) : null}
           </div>
         </section>
 
@@ -150,7 +156,7 @@ export function Landing() {
 
         <section id="problem" className={sectionSpacing}>
           <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6 lg:px-8">
-            <SectionHeader eyebrow="The Problem" title={problemSection.title} subtitle="Why leads leak out of the funnel." />
+            <SectionHeader eyebrow="The Problem" title={problemSection.title} subtitle={problemSection.intro} />
             <div className="grid gap-4 md:grid-cols-2">
               <Card className="border-slate-200 bg-white shadow-sm">
                 <CardContent className="space-y-3 pt-6">

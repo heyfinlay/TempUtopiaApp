@@ -10,10 +10,10 @@ export const siteNav = [
 
 export const heroContent = {
   eyebrow: "Temporary Utopia",
-  title: "Turn leads into booked calls — automatically.",
+  title: "Do you know how much money is sitting in your inbox right now?",
   subtitle:
-    "Temporary Utopia builds simple AI-powered systems that capture, follow up, and close leads from your DMs, website, and inbox — without needing a VA or complicated tech.",
-  trustLine: "Built for service businesses, coaches, and teams who already get leads — but lose them in the follow-up.",
+    "Temporary Utopia installs lead capture + follow-up systems that make sure every enquiry gets handled, every lead gets followed up, and more conversations turn into booked calls — automatically.",
+  trustLine: "Built for businesses already getting enquiries each week — but losing sales in the follow-up.",
   primaryCta: { label: "Book a Free Audit", href: "#cta" },
   secondaryCta: { label: "See What We Build", href: "#what-we-do" },
   stats: [
@@ -24,9 +24,12 @@ export const heroContent = {
 }
 
 export const proofStrip = ["Faster lead response", "Less ghosting", "More booked calls", "Less admin work"]
+export const proofSupporting = "Most businesses don’t need more leads — they need a system that collects the ones they already have."
 
 export const problemSection = {
   title: "Leads don’t disappear — they leak.",
+  intro:
+    "Most businesses don’t lose leads because they don’t get them. They lose leads because no one follows up fast enough — and the opportunity expires.",
   bullets: [
     "DMs go unanswered",
     "Enquiries get forgotten",
@@ -117,5 +120,5 @@ export const finalCta = {
 }
 
 export const footerContent = {
-  tagline: "AI-powered lead systems that turn DMs and enquiries into booked calls.",
+  tagline: "Automated lead systems that turn DMs and enquiries into booked calls.",
 }
