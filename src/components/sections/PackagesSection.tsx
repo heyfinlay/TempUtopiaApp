@@ -1,5 +1,6 @@
 import { Check } from "lucide-react"
 
+import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -28,43 +29,51 @@ const packages = [
 
 export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
   return (
-    <section id="packages" className="py-20 md:py-24">
+    <section id="packages" className="relative py-24 md:py-28">
       <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
-        <SectionIntro
-          title="Simple packages"
-          subtitle="Choose the level of automation you want — we handle setup and launch."
-          eyebrow="Packages"
-        />
-        <p className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
-          Most clients invest between $X and $Y depending on setup.
-        </p>
+        <Reveal>
+          <SectionIntro
+            title="Simple packages"
+            subtitle="Choose the level of automation you want — we handle setup and launch."
+            eyebrow="Packages"
+          />
+        </Reveal>
+        <Reveal delay={0.03}>
+          <p className="rounded-xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm text-slate-700 shadow-[0_18px_30px_-26px_rgba(15,23,42,0.4)]">
+            Most clients invest between $X and $Y depending on setup.
+          </p>
+        </Reveal>
         <div className="grid gap-6 md:grid-cols-3">
           {packages.map((tier, idx) => (
-            <Card
-              key={tier.name}
-              className={idx === 1 ? "border-emerald-200 bg-emerald-50 shadow-sm" : "border-slate-200 bg-white shadow-sm"}
-            >
-              <CardHeader className="space-y-2">
-                <CardTitle className={idx === 1 ? "text-emerald-900" : "text-slate-900"}>
-                  {tier.name} — {tier.description}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {tier.includes.map((item) => (
-                  <div key={item} className={idx === 1 ? "flex gap-2 text-sm text-emerald-900" : "flex gap-2 text-sm text-slate-700"}>
-                    <Check className="mt-0.5 size-4 text-emerald-600" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-                <Button onClick={onBookAudit} className="mt-3 w-full bg-emerald-600 text-white shadow-sm hover:bg-emerald-700">
-                  Book Audit
-                </Button>
-              </CardContent>
-            </Card>
+            <Reveal key={tier.name} delay={idx * 0.04}>
+              <Card
+                className={
+                  idx === 1
+                    ? "border-emerald-200 bg-emerald-50/90 shadow-[0_24px_50px_-30px_rgba(16,185,129,0.45)]"
+                    : "border-slate-200/80 bg-white/90 shadow-[0_22px_44px_-30px_rgba(15,23,42,0.4)]"
+                }
+              >
+                <CardHeader className="space-y-2">
+                  <CardTitle className={idx === 1 ? "text-emerald-900" : "text-slate-900"}>
+                    {tier.name} — {tier.description}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {tier.includes.map((item) => (
+                    <div key={item} className={idx === 1 ? "flex gap-2 text-sm text-emerald-900" : "flex gap-2 text-sm text-slate-700"}>
+                      <Check className="mt-0.5 size-4 text-emerald-600" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                  <Button onClick={onBookAudit} className="mt-3 w-full">
+                    Book Audit
+                  </Button>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
   )
 }
-

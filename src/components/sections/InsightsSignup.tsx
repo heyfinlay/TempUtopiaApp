@@ -78,15 +78,15 @@ export function InsightsSignup({ compact = false }: { compact?: boolean }) {
         <Button
           type="submit"
           disabled={status === "submitting"}
-          className="sm:w-fit bg-emerald-600 text-white hover:bg-emerald-700"
+          className="sm:w-fit"
         >
           {status === "submitting" ? "Sending..." : "Join"}
         </Button>
       </div>
       {status === "success" ? (
-        <p className="text-sm text-emerald-300">You’re in. Watch for the next drop.</p>
+        <p className="text-sm text-emerald-700">You’re in. Watch for the next drop.</p>
       ) : null}
-      {error ? <p className="text-sm text-red-300">{error}</p> : null}
+      {error ? <p className="text-sm text-red-600">{error}</p> : null}
     </form>
   )
 }

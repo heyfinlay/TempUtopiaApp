@@ -1,5 +1,6 @@
 import { BarChart3, CalendarCheck2, MessageCircle } from "lucide-react"
 
+import { Reveal } from "@/components/sections/Reveal"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,38 +12,38 @@ type HeroSectionProps = {
 
 export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative overflow-hidden py-20 md:py-24">
+    <section id="hero" className="relative overflow-hidden py-24 md:py-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(16,185,129,0.08),transparent_35%),radial-gradient(circle_at_80%_16%,rgba(15,23,42,0.06),transparent_34%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_32%,rgba(16,185,129,0.16),transparent_38%),radial-gradient(circle_at_82%_12%,rgba(14,116,144,0.11),transparent_36%),linear-gradient(to_bottom,rgba(255,255,255,0.84),rgba(255,255,255,0.58))]" />
       </div>
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="space-y-6">
-            <Badge variant="outline" className="border-emerald-200 bg-white text-emerald-700">
+        <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <Reveal className="space-y-8">
+            <Badge variant="outline" className="border-emerald-200 bg-white/90 text-emerald-700 backdrop-blur-sm">
               Temporary Utopia
             </Badge>
-            <div className="space-y-4">
-              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+            <div className="space-y-5">
+              <h1 className="max-w-2xl text-4xl font-semibold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
                 Turn enquiries into booked calls — automatically.
               </h1>
-              <p className="max-w-2xl text-lg text-slate-600">
+              <p className="max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
                 We install an AI follow-up system that replies instantly, qualifies leads, and books appointments while you run your
                 business.
               </p>
-              <p className="text-sm text-slate-500">No contracts. No complicated software. Setup in days.</p>
+              <p className="text-sm font-medium text-slate-500">No contracts. No complicated software. Setup in days.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={onPrimaryClick} className="bg-emerald-600 text-white shadow-sm hover:bg-emerald-700">
+              <Button onClick={onPrimaryClick} className="h-11 px-5 text-base">
                 Book a Free Audit
               </Button>
-              <Button variant="outline" className="border-slate-200 text-slate-900" onClick={onSecondaryClick}>
+              <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" onClick={onSecondaryClick}>
                 See How It Works
               </Button>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="relative pb-6 lg:pb-10">
-            <Card className="border-slate-200 bg-white shadow-sm">
+          <Reveal className="relative pb-6 lg:pb-10" delay={0.1}>
+            <Card className="border-slate-200/80 bg-white/90 shadow-[0_20px_42px_-32px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_26px_52px_-30px_rgba(16,185,129,0.38)]">
               <CardHeader className="space-y-1 pb-4">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <MessageCircle className="size-4 text-emerald-600" />
@@ -63,7 +64,7 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               </CardContent>
             </Card>
 
-            <Card className="mt-4 border-slate-200 bg-white shadow-sm lg:-mt-6 lg:ml-10">
+            <Card className="mt-4 border-slate-200/80 bg-white/90 shadow-[0_16px_32px_-24px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_22px_45px_-25px_rgba(16,185,129,0.35)] lg:-mt-6 lg:ml-10">
               <CardHeader className="space-y-1 pb-3">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <CalendarCheck2 className="size-4 text-emerald-600" />
@@ -77,7 +78,7 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               </CardContent>
             </Card>
 
-            <Card className="mt-4 border-slate-200 bg-white shadow-sm lg:-mt-6 lg:mr-8">
+            <Card className="mt-4 border-slate-200/80 bg-white/90 shadow-[0_16px_32px_-24px_rgba(15,23,42,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_22px_45px_-25px_rgba(16,185,129,0.35)] lg:-mt-6 lg:mr-8">
               <CardHeader className="space-y-1 pb-3">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <BarChart3 className="size-4 text-emerald-600" />
@@ -95,10 +96,9 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
   )
 }
-

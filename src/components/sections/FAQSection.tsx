@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -30,17 +31,21 @@ const faqItems = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="py-20 md:py-24">
+    <section id="faq" className="relative py-24 md:py-28">
       <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
-        <SectionIntro title="Questions people usually ask" eyebrow="FAQ" />
+        <Reveal>
+          <SectionIntro title="Questions people usually ask" eyebrow="FAQ" />
+        </Reveal>
         <div className="grid gap-4 md:grid-cols-2">
-          {faqItems.map((item) => (
-            <Card key={item.question} className="border-slate-200 bg-white shadow-sm">
-              <CardHeader className="space-y-2">
-                <CardTitle className="text-slate-900">{item.question}</CardTitle>
-                <CardDescription className="text-slate-600">{item.answer}</CardDescription>
-              </CardHeader>
-            </Card>
+          {faqItems.map((item, idx) => (
+            <Reveal key={item.question} delay={idx * 0.03}>
+              <Card className="border-slate-200/80 bg-white/90 shadow-[0_16px_36px_-26px_rgba(15,23,42,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80">
+                <CardHeader className="space-y-2">
+                  <CardTitle className="text-slate-900">{item.question}</CardTitle>
+                  <CardDescription className="text-slate-600">{item.answer}</CardDescription>
+                </CardHeader>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>

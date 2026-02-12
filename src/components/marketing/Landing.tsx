@@ -53,8 +53,8 @@ export function Landing() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900">
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-sm">
+    <div className="min-h-screen text-slate-900">
+      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 shadow-[0_8px_30px_-24px_rgba(15,23,42,0.6)] backdrop-blur-md">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-800">
             <Sparkles className="size-4 text-emerald-600" />
@@ -66,19 +66,19 @@ export function Landing() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="transition-colors hover:text-slate-900"
+                className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 {item.label}
               </a>
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <Button asChild size="sm" variant="outline" className="hidden border-slate-200 text-slate-900 md:inline-flex">
+            <Button asChild size="sm" variant="outline" className="hidden md:inline-flex">
               <Link href="#system-diagram" onClick={(e) => handleNavClick(e, "#system-diagram")}>
                 See How It Works
               </Link>
             </Button>
-            <Button asChild size="sm" className="bg-emerald-600 text-white shadow-sm hover:bg-emerald-700">
+            <Button asChild size="sm">
               <Link
                 href="#cta"
                 onClick={(e) => {
@@ -119,12 +119,16 @@ export function Landing() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="transition-colors hover:text-slate-900"
+                className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
                 {item.label}
               </a>
             ))}
-            <a href="#cta" onClick={(e) => handleNavClick(e, "#cta")} className="transition-colors hover:text-slate-900">
+            <a
+              href="#cta"
+              onClick={(e) => handleNavClick(e, "#cta")}
+              className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            >
               Book Audit
             </a>
           </div>
