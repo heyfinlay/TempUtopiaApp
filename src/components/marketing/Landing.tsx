@@ -4,6 +4,7 @@ import type { MouseEvent } from "react"
 import { Sparkles } from "lucide-react"
 import Link from "next/link"
 
+import { AdminAutomationCalculator } from "@/components/sections/AdminAutomationCalculator"
 import { AuditTimelineSection } from "@/components/sections/AuditTimelineSection"
 import { DeliverablesSection } from "@/components/sections/DeliverablesSection"
 import { DemoProofSection } from "@/components/sections/DemoProofSection"
@@ -21,6 +22,7 @@ import { Button } from "@/components/ui/button"
 const navItems = [
   { label: "System", href: "#system-diagram" },
   { label: "Outcomes", href: "#outcomes" },
+  { label: "Calculator", href: "#roi" },
   { label: "Proof", href: "#demo-proof" },
   { label: "Packages", href: "#packages" },
   { label: "FAQ", href: "#faq" },
@@ -97,6 +99,7 @@ export function Landing() {
         <HeroSection onPrimaryClick={handlePrimaryCta} onSecondaryClick={handleSecondaryCta} />
         <SystemStepsCarousel />
         <OutcomesSection />
+        <AdminAutomationCalculator />
         <DemoProofSection />
         <ForWhoSection />
         <DeliverablesSection />
