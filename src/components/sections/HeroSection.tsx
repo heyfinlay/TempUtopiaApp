@@ -1,4 +1,5 @@
 import { BarChart3, CalendarCheck2, MessageCircle } from "lucide-react"
+import Link from "next/link"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { Badge } from "@/components/marketing-ui/badge"
@@ -33,11 +34,14 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               <p className="text-sm font-medium text-slate-500">No contracts. No complicated software. Setup in days.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={onPrimaryClick} className="h-11 px-5 text-base">
-                Book a Free Audit
+              <Button asChild className="h-11 px-5 text-base">
+                <Link href="/login">Get Started</Link>
               </Button>
               <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" onClick={onSecondaryClick}>
                 See How It Works
+              </Button>
+              <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" onClick={onPrimaryClick}>
+                Book a Free Audit
               </Button>
             </div>
           </Reveal>

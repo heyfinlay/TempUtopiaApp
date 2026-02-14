@@ -25,6 +25,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <div className="mx-auto max-w-xl py-12">
       <Panel title="Login" subtitle="Sign in or create an account">
         <EmailLoginForm />
+        <p className="mt-4 text-xs text-slate-400">
+          <a href="/" className="underline decoration-slate-500/60 underline-offset-4">Return to landing page</a>
+        </p>
 
         {error ? (
           <div className="mt-3 space-y-1 rounded-md border border-red-400/40 bg-red-500/10 p-3 text-sm text-red-200">

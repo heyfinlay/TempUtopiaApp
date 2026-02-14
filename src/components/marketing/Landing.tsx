@@ -87,16 +87,11 @@ export function Landing() {
                 See How It Works
               </Link>
             </Button>
+            <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex">
+              <Link href="/login">Sign in</Link>
+            </Button>
             <Button asChild size="sm">
-              <Link
-                href="#cta"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handlePrimaryCta()
-                }}
-              >
-                Book a Free Audit
-              </Link>
+              <Link href="/login">Get Started</Link>
             </Button>
           </div>
         </nav>
@@ -134,6 +129,12 @@ export function Landing() {
                 {item.label}
               </a>
             ))}
+            <a
+              href="/login"
+              className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            >
+              Sign in
+            </a>
             <a
               href="#cta"
               onClick={(e) => handleNavClick(e, "#cta")}
