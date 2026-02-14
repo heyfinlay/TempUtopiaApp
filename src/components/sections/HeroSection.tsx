@@ -13,10 +13,7 @@ type HeroSectionProps = {
 
 export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative overflow-hidden py-24 md:py-28">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_32%,rgba(16,185,129,0.16),transparent_38%),radial-gradient(circle_at_82%_12%,rgba(14,116,144,0.11),transparent_36%),linear-gradient(to_bottom,rgba(255,255,255,0.84),rgba(255,255,255,0.58))]" />
-      </div>
+    <section id="hero" className="relative overflow-hidden bg-white py-24 md:py-28">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
           <Reveal className="space-y-8">
