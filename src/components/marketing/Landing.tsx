@@ -1,6 +1,6 @@
 "use client"
 
-import type { MouseEvent } from "react"
+import { useEffect, type MouseEvent } from "react"
 import { Sparkles } from "lucide-react"
 import Link from "next/link"
 
@@ -17,7 +17,7 @@ import { OutcomesSection } from "@/components/sections/OutcomesSection"
 import { PackagesSection } from "@/components/sections/PackagesSection"
 import { SystemStepsCarousel } from "@/components/sections/SystemStepsCarousel"
 import { WhyUsSection } from "@/components/sections/WhyUsSection"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/marketing-ui/button"
 
 const navItems = [
   { label: "System", href: "#system-diagram" },
@@ -29,6 +29,13 @@ const navItems = [
 ]
 
 export function Landing() {
+  useEffect(() => {
+    document.body.classList.add("marketing-body")
+    return () => {
+      document.body.classList.remove("marketing-body")
+    }
+  }, [])
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
   }

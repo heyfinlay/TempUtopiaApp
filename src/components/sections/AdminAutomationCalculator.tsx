@@ -5,9 +5,9 @@ import { Calculator, TrendingUp } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/marketing-ui/card"
+import { Input } from "@/components/marketing-ui/input"
+import { Label } from "@/components/marketing-ui/label"
 
 const currency = (value: number) =>
   value.toLocaleString("en-AU", {

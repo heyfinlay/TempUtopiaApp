@@ -3,9 +3,9 @@
 import { useCallback, useRef, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/marketing-ui/badge"
+import { Button } from "@/components/marketing-ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 import { cn } from "@/lib/utils"
 import { Reveal } from "@/components/sections/Reveal"
 

@@ -2,7 +2,7 @@ import { ArrowUpRight, Clock3, ClipboardMinus, UserCheck } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 const outcomes = [
   {

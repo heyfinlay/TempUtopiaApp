@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/marketing-ui/badge"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 const timeline = [
   {

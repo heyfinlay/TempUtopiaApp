@@ -2,8 +2,8 @@ import { Check } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/marketing-ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 type PackagesSectionProps = {
   onBookAudit: () => void

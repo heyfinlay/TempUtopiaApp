@@ -1,0 +1,91 @@
+import "server-only";
+
+import type { SupabaseClient, User } from "@supabase/supabase-js";
+import { redirect } from "next/navigation";
+import { getServerEnv } from "@/lib/env";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
+import type { Database } from "@/types/supabase";
+
+export interface ApiAuthContext {
+  supabase: SupabaseClient<Database>;
+  user: User;
+}
+
+const normalizeEmail = (value: string | undefined | null): string | null => {
+  if (!value) {
+    return null;
+  }
+
+  const normalized = value.trim().toLowerCase();
+  return normalized || null;
+};
+
+const isAllowlisted = (user: User): boolean => {
+  const env = getServerEnv();
+  const adminEmail = normalizeEmail(env.ADMIN_EMAIL);
+
+  if (!adminEmail) {
+    return true;
+  }
+
+  return normalizeEmail(user.email) === adminEmail;
+};
+
+const ensureAllowlisted = (user: User): boolean => {
+  return isAllowlisted(user);
+};
+
+export const createServerAuthClient = async (): Promise<SupabaseClient<Database>> => {
+  return createServerSupabaseClient();
+};
+
+export const getUser = async (): Promise<User | null> => {
+  const supabase = await createServerAuthClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user) {
+    return null;
+  }
+
+  const allowlisted = ensureAllowlisted(data.user);
+  if (!allowlisted) {
+    return null;
+  }
+
+  return data.user;
+};
+
+export const requireUser = async (): Promise<User> => {
+  const supabase = await createServerAuthClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user) {
+    redirect("/login");
+  }
+
+  const allowlisted = ensureAllowlisted(data.user);
+  if (!allowlisted) {
+    redirect("/login?error=Access%20not%20enabled.");
+  }
+
+  return data.user;
+};
+
+export const requireApiUser = async (): Promise<ApiAuthContext | Response> => {
+  const supabase = await createServerAuthClient();
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user) {
+    return Response.json({ error: "unauthorized" }, { status: 401 });
+  }
+
+  const allowlisted = ensureAllowlisted(data.user);
+  if (!allowlisted) {
+    return Response.json({ error: "Access not enabled." }, { status: 403 });
+  }
+
+  return {
+    supabase,
+    user: data.user,
+  };
+};

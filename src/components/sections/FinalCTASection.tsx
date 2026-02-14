@@ -3,8 +3,8 @@ import { Sparkles } from "lucide-react"
 import { Reveal } from "@/components/sections/Reveal"
 import { LeadIntakeForm } from "@/components/sections/LeadIntakeForm"
 import { InsightsSignup } from "@/components/sections/InsightsSignup"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/marketing-ui/badge"
+import { Button } from "@/components/marketing-ui/button"
 
 type FinalCTASectionProps = {
   onPrimaryClick: () => void

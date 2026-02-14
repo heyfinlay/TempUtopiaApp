@@ -2,7 +2,7 @@ import { Check } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/marketing-ui/card"
 
 const deliverables = [
   "AI receptionist + instant replies",

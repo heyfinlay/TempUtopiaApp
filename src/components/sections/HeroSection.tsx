@@ -1,9 +1,9 @@
 import { BarChart3, CalendarCheck2, MessageCircle } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/marketing-ui/badge"
+import { Button } from "@/components/marketing-ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 type HeroSectionProps = {
   onPrimaryClick: () => void

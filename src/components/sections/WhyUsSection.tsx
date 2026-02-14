@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react"
 
 import { Reveal } from "@/components/sections/Reveal"
 import { SectionIntro } from "@/components/sections/SectionIntro"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 const comparison = [
   {
