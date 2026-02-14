@@ -32,11 +32,7 @@ body {
 
 body.marketing-body {
   color: #0f172a;
-  background-image:
-    radial-gradient(circle at 8% 10%, rgba(16, 185, 129, 0.1), transparent 30%),
-    radial-gradient(circle at 92% 18%, rgba(59, 130, 246, 0.08), transparent 34%),
-    linear-gradient(to bottom, #f8fafc, #ffffff 22%, #f8fafc 100%);
-  background-attachment: fixed;
+  background: #ffffff;
 }
 
 a {
