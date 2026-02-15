@@ -201,11 +201,48 @@ export default function ClientPortalDashboard() {
   }, [searchQuery, leadsData]);
 
   React.useEffect(() => {
+    type SummaryResponse = {
+      empty?: boolean;
+      metrics?: {
+        leads24h?: number;
+        queued24h?: number;
+        replies24h?: number;
+        booked24h?: number;
+      };
+      tasks?: Array<{
+        id: string;
+        created_at: string;
+        title: string;
+        source?: string | null;
+        output?: string | null;
+        status?: string | null;
+        proof_url?: string | null;
+      }>;
+      leads?: Array<{
+        id: string;
+        company: string;
+        channel?: string | null;
+        fit_score?: number | null;
+        reason?: string | null;
+        origin_task_id?: string | null;
+        created_at?: string | null;
+      }>;
+      settings?: {
+        industry?: string | null;
+        location?: string | null;
+        max_outreach_per_day?: number | null;
+        approval_required?: boolean | null;
+        exclude_keywords?: string | null;
+        offer_focus?: string | null;
+      } | null;
+      agent?: { status?: string | null } | null;
+    };
+
     const load = async () => {
       try {
         const res = await fetch("/api/owner/summary", { cache: "no-store" });
         if (!res.ok) return;
-        const data = (await res.json()) as any;
+        const data = (await res.json()) as SummaryResponse;
         if (data?.empty) return;
         if (data?.metrics) {
           setMetrics({
@@ -217,7 +254,7 @@ export default function ClientPortalDashboard() {
         }
         if (Array.isArray(data?.tasks) && data.tasks.length > 0) {
           setTasksData(
-            data.tasks.map((t: any) => ({
+            data.tasks.map((t) => ({
               id: t.id,
               when: new Date(t.created_at).toLocaleString(),
               title: t.title,
@@ -230,7 +267,7 @@ export default function ClientPortalDashboard() {
         }
         if (Array.isArray(data?.leads) && data.leads.length > 0) {
           setLeadsData(
-            data.leads.map((l: any) => ({
+            data.leads.map((l) => ({
               id: l.id,
               company: l.company,
               meta: l.created_at ? new Date(l.created_at).toLocaleDateString() : "",
