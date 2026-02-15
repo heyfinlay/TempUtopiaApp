@@ -5,25 +5,20 @@ import { Sparkles } from "lucide-react"
 import Link from "next/link"
 
 import { AdminAutomationCalculator } from "@/components/sections/AdminAutomationCalculator"
-import { AuditTimelineSection } from "@/components/sections/AuditTimelineSection"
-import { DeliverablesSection } from "@/components/sections/DeliverablesSection"
 import { DemoProofSection } from "@/components/sections/DemoProofSection"
 import { FAQSection } from "@/components/sections/FAQSection"
 import { FinalCTASection } from "@/components/sections/FinalCTASection"
 import { ForWhoSection } from "@/components/sections/ForWhoSection"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { focusLeadForm } from "@/components/sections/LeadIntakeForm"
-import { OutcomesSection } from "@/components/sections/OutcomesSection"
 import { PackagesSection } from "@/components/sections/PackagesSection"
 import { SystemStepsCarousel } from "@/components/sections/SystemStepsCarousel"
-import { WhyUsSection } from "@/components/sections/WhyUsSection"
 import { Button } from "@/components/marketing-ui/button"
 
 const navItems = [
   { label: "System", href: "#system-diagram" },
-  { label: "Outcomes", href: "#outcomes" },
-  { label: "Calculator", href: "#roi" },
   { label: "Proof", href: "#demo-proof" },
+  { label: "Calculator", href: "#roi" },
   { label: "Packages", href: "#packages" },
   { label: "FAQ", href: "#faq" },
 ]
@@ -100,13 +95,9 @@ export function Landing() {
       <main>
         <HeroSection onPrimaryClick={handlePrimaryCta} onSecondaryClick={handleSecondaryCta} />
         <SystemStepsCarousel />
-        <OutcomesSection />
-        <AdminAutomationCalculator />
         <DemoProofSection />
+        <AdminAutomationCalculator />
         <ForWhoSection />
-        <DeliverablesSection />
-        <WhyUsSection />
-        <AuditTimelineSection />
         <PackagesSection onBookAudit={handlePrimaryCta} />
         <FAQSection />
         <FinalCTASection onPrimaryClick={handlePrimaryCta} />

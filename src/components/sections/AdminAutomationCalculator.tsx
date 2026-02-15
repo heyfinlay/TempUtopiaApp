@@ -8,6 +8,7 @@ import { SectionIntro } from "@/components/sections/SectionIntro"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 import { Input } from "@/components/marketing-ui/input"
 import { Label } from "@/components/marketing-ui/label"
+import { Button } from "@/components/marketing-ui/button"
 
 const currency = (value: number) =>
   value.toLocaleString("en-AU", {
@@ -22,6 +23,9 @@ export function AdminAutomationCalculator() {
   const [missedLeads, setMissedLeads] = useState(10)
   const [avgDealValue, setAvgDealValue] = useState(1800)
   const [closeRate, setCloseRate] = useState(20)
+  const [fullName, setFullName] = useState("")
+  const [businessName, setBusinessName] = useState("")
+  const [email, setEmail] = useState("")
 
   const { adminCost, missedRevenue, totalOpportunity } = useMemo(() => {
     const weeklyAdminCost = hoursPerWeek * hourlyRate
@@ -130,6 +134,49 @@ export function AdminAutomationCalculator() {
                   <p className="text-xs uppercase tracking-[0.2em] text-emerald-700">Total upside</p>
                   <p className="text-2xl font-semibold text-emerald-900">{currency(totalOpportunity)}</p>
                   <p className="mt-1 text-sm text-emerald-700">What automation can unlock every month.</p>
+                </div>
+
+                <div className="rounded-2xl border border-emerald-200/70 bg-white/95 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Get the full breakdown</p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    Leave your details and we’ll send the personalised estimate + next steps.
+                  </p>
+                  <div className="mt-4 grid gap-3">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="fullName">Full name</Label>
+                        <Input
+                          id="fullName"
+                          value={fullName}
+                          onChange={(event) => setFullName(event.target.value)}
+                          placeholder="Jordan Lee"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="businessName">Business name</Label>
+                        <Input
+                          id="businessName"
+                          value={businessName}
+                          onChange={(event) => setBusinessName(event.target.value)}
+                          placeholder="Studio Aesthetics"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="calcEmail">Email</Label>
+                      <Input
+                        id="calcEmail"
+                        type="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="you@clinic.com"
+                      />
+                    </div>
+                    <Button className="w-full">Send me the estimate</Button>
+                    <p className="text-xs text-slate-500">
+                      We’ll never spam. This just lets us send your personalised ROI breakdown.
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
