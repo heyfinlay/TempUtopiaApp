@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
   }
 
-  const supabase = createServiceRoleClient() as any;
+  const supabase = createServiceRoleClient() as unknown as ReturnType<typeof createServiceRoleClient>;
 
   let runId: string | null = null;
   if (payload.run) {

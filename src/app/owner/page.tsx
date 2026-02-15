@@ -285,7 +285,7 @@ export default function ClientPortalDashboard() {
               title: t.title,
               source: t.source ?? "",
               output: t.output ?? "",
-              status: t.status ?? "complete",
+              status: (t.status ?? "complete") as TaskRow["status"],
               proof_url: t.proof_url ?? "",
             })),
           );
