@@ -36,7 +36,8 @@ export const AppShell = ({ children }: PropsWithChildren) => {
   const [companies, setCompanies] = useState<CompanySearchItem[]>([]);
   const isPortalRoute = pathname.startsWith("/portal/");
   const isMarketingRoute = pathname === "/" || pathname === "/overview";
-  const isShelllessRoute = isMarketingRoute || pathname === "/login" || isPortalRoute;
+  const isOwnerRoute = pathname === "/owner" || pathname.startsWith("/owner/");
+  const isShelllessRoute = isMarketingRoute || isOwnerRoute || pathname === "/login" || isPortalRoute;
 
   useEffect(() => {
     const value = search.trim().toLowerCase();
@@ -104,7 +105,7 @@ export const AppShell = ({ children }: PropsWithChildren) => {
   }, [router]);
 
   if (isShelllessRoute) {
-    if (isMarketingRoute) {
+    if (isMarketingRoute || isOwnerRoute) {
       return (
         <div className="min-h-screen bg-white text-slate-900">
           <main className="w-full">{children}</main>
