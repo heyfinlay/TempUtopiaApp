@@ -282,6 +282,276 @@ export interface Database {
         };
         Relationships: [];
       };
+      clients: {
+        Row: {
+          id: string;
+          name: string;
+          industry: string | null;
+          timezone: string | null;
+          owner_user_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          industry?: string | null;
+          timezone?: string | null;
+          owner_user_id?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          industry?: string | null;
+          timezone?: string | null;
+          owner_user_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      agents: {
+        Row: {
+          id: string;
+          client_id: string;
+          name: string;
+          status: string;
+          last_run_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          name?: string;
+          status?: string;
+          last_run_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          name?: string;
+          status?: string;
+          last_run_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      agent_runs: {
+        Row: {
+          id: string;
+          client_id: string;
+          agent_id: string | null;
+          type: string;
+          status: string;
+          started_at: string | null;
+          completed_at: string | null;
+          summary: string | null;
+          output_count: number | null;
+          meta: Json | null;
+          proof_url: string | null;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          agent_id?: string | null;
+          type: string;
+          status?: string;
+          started_at?: string | null;
+          completed_at?: string | null;
+          summary?: string | null;
+          output_count?: number | null;
+          meta?: Json | null;
+          proof_url?: string | null;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          agent_id?: string | null;
+          type?: string;
+          status?: string;
+          started_at?: string | null;
+          completed_at?: string | null;
+          summary?: string | null;
+          output_count?: number | null;
+          meta?: Json | null;
+          proof_url?: string | null;
+        };
+        Relationships: [];
+      };
+      agent_tasks: {
+        Row: {
+          id: string;
+          client_id: string;
+          agent_id: string | null;
+          run_id: string | null;
+          title: string;
+          source: string | null;
+          output: string | null;
+          status: string;
+          created_at: string;
+          proof_url: string | null;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          agent_id?: string | null;
+          run_id?: string | null;
+          title: string;
+          source?: string | null;
+          output?: string | null;
+          status?: string;
+          created_at?: string;
+          proof_url?: string | null;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          agent_id?: string | null;
+          run_id?: string | null;
+          title?: string;
+          source?: string | null;
+          output?: string | null;
+          status?: string;
+          created_at?: string;
+          proof_url?: string | null;
+        };
+        Relationships: [];
+      };
+      conversations: {
+        Row: {
+          id: string;
+          client_id: string;
+          channel: string | null;
+          direction: string | null;
+          contact_name: string | null;
+          contact_handle: string | null;
+          last_message: string | null;
+          status: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          channel?: string | null;
+          direction?: string | null;
+          contact_name?: string | null;
+          contact_handle?: string | null;
+          last_message?: string | null;
+          status?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          channel?: string | null;
+          direction?: string | null;
+          contact_name?: string | null;
+          contact_handle?: string | null;
+          last_message?: string | null;
+          status?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      meetings: {
+        Row: {
+          id: string;
+          client_id: string;
+          contact_name: string | null;
+          scheduled_for: string | null;
+          status: string | null;
+          source: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          contact_name?: string | null;
+          scheduled_for?: string | null;
+          status?: string | null;
+          source?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          contact_name?: string | null;
+          scheduled_for?: string | null;
+          status?: string | null;
+          source?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      leads: {
+        Row: {
+          id: string;
+          client_id: string;
+          company: string;
+          channel: string | null;
+          fit_score: number | null;
+          reason: string | null;
+          origin_task_id: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          company: string;
+          channel?: string | null;
+          fit_score?: number | null;
+          reason?: string | null;
+          origin_task_id?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          company?: string;
+          channel?: string | null;
+          fit_score?: number | null;
+          reason?: string | null;
+          origin_task_id?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      agent_settings: {
+        Row: {
+          id: string;
+          client_id: string;
+          industry: string | null;
+          location: string | null;
+          max_outreach_per_day: number | null;
+          approval_required: boolean | null;
+          exclude_keywords: string | null;
+          offer_focus: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          client_id: string;
+          industry?: string | null;
+          location?: string | null;
+          max_outreach_per_day?: number | null;
+          approval_required?: boolean | null;
+          exclude_keywords?: string | null;
+          offer_focus?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          client_id?: string;
+          industry?: string | null;
+          location?: string | null;
+          max_outreach_per_day?: number | null;
+          approval_required?: boolean | null;
+          exclude_keywords?: string | null;
+          offer_focus?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

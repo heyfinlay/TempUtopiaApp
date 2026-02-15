@@ -24,7 +24,27 @@ import {
 } from "lucide-react";
 
 // Mock data
-const MOCK_TASKS = [
+type TaskRow = {
+  id: string;
+  when: string;
+  title: string;
+  source: string;
+  output: string;
+  status: "complete" | "needs_approval" | "failed";
+  proof_url?: string;
+};
+
+type LeadRow = {
+  id: string;
+  company: string;
+  meta: string;
+  channel: string;
+  fitScore: number;
+  reason: string;
+  originTask: string;
+};
+
+const MOCK_TASKS: TaskRow[] = [
   {
     id: "T-1042",
     when: "Today 09:12",
@@ -32,6 +52,7 @@ const MOCK_TASKS = [
     source: "Google Maps",
     output: "+12 leads",
     status: "complete",
+    proof_url: "",
   },
   {
     id: "T-1041",
@@ -40,6 +61,7 @@ const MOCK_TASKS = [
     source: "Templates",
     output: "12 queued",
     status: "needs_approval",
+    proof_url: "",
   },
   {
     id: "T-1040",
@@ -48,6 +70,7 @@ const MOCK_TASKS = [
     source: "Web",
     output: "+18 enriched",
     status: "complete",
+    proof_url: "",
   },
   {
     id: "T-1038",
@@ -56,6 +79,7 @@ const MOCK_TASKS = [
     source: "Google",
     output: "+21 leads",
     status: "complete",
+    proof_url: "",
   },
   {
     id: "T-1032",
@@ -64,10 +88,11 @@ const MOCK_TASKS = [
     source: "Internal",
     output: "1 PDF",
     status: "failed",
+    proof_url: "",
   },
-] as const;
+];
 
-const MOCK_LEADS = [
+const MOCK_LEADS: LeadRow[] = [
   {
     id: "L-2001",
     company: "Vogue Aesthetics",
@@ -95,9 +120,9 @@ const MOCK_LEADS = [
     reason: "High engagement, inconsistent booking system",
     originTask: "T-1038",
   },
-] as const;
+];
 
-type TaskStatus = (typeof MOCK_TASKS)[number]["status"];
+type TaskStatus = TaskRow["status"];
 
 type NavKey =
   | "overview"
