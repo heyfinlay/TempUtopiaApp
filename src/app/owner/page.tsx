@@ -114,12 +114,11 @@ type NavKey =
 function StatusBadge({ status }: { status: TaskStatus }) {
   const map: Record<
     TaskStatus,
-    { label: string; tone: "good" | "warn" | "bad" | "info"; icon: React.ReactNode }
+    { label: string; tone: "good" | "warn" | "bad"; icon: React.ReactNode }
   > = {
     complete: { label: "Complete", tone: "good", icon: <CheckCircle2 className="h-3.5 w-3.5" /> },
     needs_approval: { label: "Needs approval", tone: "warn", icon: <Inbox className="h-3.5 w-3.5" /> },
     failed: { label: "Failed", tone: "bad", icon: <CircleDot className="h-3.5 w-3.5" /> },
-    running: { label: "Running", tone: "info", icon: <PlayCircle className="h-3.5 w-3.5" /> },
   };
   const s = map[status];
   return (
