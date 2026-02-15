@@ -168,28 +168,117 @@ export default function ClientPortalDashboard() {
   );
   const [agentRunning, setAgentRunning] = React.useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [metrics, setMetrics] = React.useState({
+    leads24h: 18,
+    queued24h: 12,
+    replies24h: 4,
+    booked24h: 1,
+  });
+  const [tasksData, setTasksData] = React.useState(MOCK_TASKS);
+  const [leadsData, setLeadsData] = React.useState(MOCK_LEADS);
+  const [saving, setSaving] = React.useState(false);
 
   const tasks = React.useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return MOCK_TASKS;
-    return MOCK_TASKS.filter(
+    if (!q) return tasksData;
+    return tasksData.filter(
       (t) =>
         t.title.toLowerCase().includes(q) ||
-        t.source.toLowerCase().includes(q) ||
+        (t.source || "").toLowerCase().includes(q) ||
         t.id.toLowerCase().includes(q),
     );
-  }, [searchQuery]);
+  }, [searchQuery, tasksData]);
 
   const leads = React.useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return MOCK_LEADS;
-    return MOCK_LEADS.filter(
+    if (!q) return leadsData;
+    return leadsData.filter(
       (l) =>
         l.company.toLowerCase().includes(q) ||
-        l.channel.toLowerCase().includes(q) ||
-        l.originTask.toLowerCase().includes(q),
+        (l.channel || "").toLowerCase().includes(q) ||
+        (l.originTask || "").toLowerCase().includes(q),
     );
-  }, [searchQuery]);
+  }, [searchQuery, leadsData]);
+
+  React.useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch("/api/owner/summary", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = (await res.json()) as any;
+        if (data?.empty) return;
+        if (data?.metrics) {
+          setMetrics({
+            leads24h: data.metrics.leads24h ?? 0,
+            queued24h: data.metrics.queued24h ?? 0,
+            replies24h: data.metrics.replies24h ?? 0,
+            booked24h: data.metrics.booked24h ?? 0,
+          });
+        }
+        if (Array.isArray(data?.tasks) && data.tasks.length > 0) {
+          setTasksData(
+            data.tasks.map((t: any) => ({
+              id: t.id,
+              when: new Date(t.created_at).toLocaleString(),
+              title: t.title,
+              source: t.source ?? "",
+              output: t.output ?? "",
+              status: t.status ?? "complete",
+            })),
+          );
+        }
+        if (Array.isArray(data?.leads) && data.leads.length > 0) {
+          setLeadsData(
+            data.leads.map((l: any) => ({
+              id: l.id,
+              company: l.company,
+              meta: l.created_at ? new Date(l.created_at).toLocaleDateString() : "",
+              channel: l.channel ?? "",
+              fitScore: l.fit_score ?? 0,
+              reason: l.reason ?? "",
+              originTask: l.origin_task_id ?? "",
+            })),
+          );
+        }
+        if (data?.settings) {
+          setIndustry(data.settings.industry ?? industry);
+          setLocation(data.settings.location ?? location);
+          setMaxOutreach(String(data.settings.max_outreach_per_day ?? maxOutreach));
+          setApprovalRequired(Boolean(data.settings.approval_required ?? approvalRequired));
+          setExcludeKeywords(data.settings.exclude_keywords ?? excludeKeywords);
+          setOfferFocus(data.settings.offer_focus ?? offerFocus);
+        }
+        if (data?.agent?.status) {
+          setAgentRunning(data.agent.status !== "paused");
+        }
+      } catch {
+        // keep mock fallback
+      }
+    };
+
+    void load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const saveSettings = async () => {
+    setSaving(true);
+    try {
+      await fetch("/api/owner/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          industry,
+          location,
+          max_outreach_per_day: Number(maxOutreach) || 0,
+          approval_required: approvalRequired,
+          exclude_keywords: excludeKeywords,
+          offer_focus: offerFocus,
+        }),
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <div className="portal-shell">
@@ -335,15 +424,15 @@ export default function ClientPortalDashboard() {
             <div className="cards">
               <div className="card">
                 <div className="k">Leads found (24h)</div>
-                <div className="v">18</div>
-                <div className="s">+6 vs yesterday</div>
+                <div className="v">{metrics.leads24h}</div>
+                <div className="s">Captured in last 24h</div>
                 <div className="spark">
                   <i style={{ width: "68%" }} />
                 </div>
               </div>
               <div className="card">
                 <div className="k">Messages queued</div>
-                <div className="v">12</div>
+                <div className="v">{metrics.queued24h}</div>
                 <div className="s">Waiting approval</div>
                 <div className="spark">
                   <i style={{ width: "42%" }} />
@@ -351,16 +440,16 @@ export default function ClientPortalDashboard() {
               </div>
               <div className="card">
                 <div className="k">Replies</div>
-                <div className="v">4</div>
-                <div className="s">2 positive signals</div>
+                <div className="v">{metrics.replies24h}</div>
+                <div className="s">Inbound replies</div>
                 <div className="spark">
                   <i style={{ width: "36%" }} />
                 </div>
               </div>
               <div className="card">
                 <div className="k">Booked calls</div>
-                <div className="v">1</div>
-                <div className="s">This week</div>
+                <div className="v">{metrics.booked24h}</div>
+                <div className="s">Confirmed</div>
                 <div className="spark">
                   <i style={{ width: "18%" }} />
                 </div>
@@ -538,7 +627,9 @@ export default function ClientPortalDashboard() {
                           />
                         </div>
                         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                          <button className="btn primary">Save settings</button>
+                          <button className="btn primary" onClick={saveSettings} disabled={saving}>
+                            {saving ? "Saving..." : "Save settings"}
+                          </button>
                           <button className="btn">
                             Preview targeting <ExternalLink className="h-4 w-4" />
                           </button>
