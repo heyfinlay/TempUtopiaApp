@@ -9,6 +9,12 @@ export default defineConfig({
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },
+  webServer: {
+    command: "pnpm dev -p 3000",
+    url: "http://localhost:3000",
+    reuseExistingServer: true,
+    timeout: 120_000,
+  },
   projects: [
     {
       name: "chromium",

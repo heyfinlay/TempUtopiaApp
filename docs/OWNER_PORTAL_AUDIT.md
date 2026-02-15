@@ -113,10 +113,13 @@ Owner portal routes of interest:
 - Tables: clients, agents, agent_runs, agent_tasks, leads, conversations, meetings, agent_settings
 
 ## Playwright Findings (Phase B)
-**Status:** Playwright setup added (config + tests). Not executed in this environment due to pnpm availability; run locally with:
+**Status:** Playwright setup added (config + tests). Initial run failed because no local server was running (ERR_CONNECTION_REFUSED). Added `webServer` to Playwright config to auto-start `pnpm dev -p 3000`.
+
+Run locally:
 ```
 pnpm exec playwright test
 ```
+
 **Tests created:** `tests/owner-portal.spec.ts`
 - Auth: /owner redirects to /login when logged out
 - Auth (optional): logged‑in identity visible when credentials provided via env
