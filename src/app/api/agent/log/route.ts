@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
+import type { Json } from "@/types/supabase";
 
 const requireSecret = () => {
   const secret = process.env.AGENT_LOG_SECRET;
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
           status?: string;
           summary?: string;
           output_count?: number;
-          meta?: Record<string, unknown>;
+          meta?: Json;
           proof_url?: string | null;
         };
         tasks?: Array<{
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
   }
 
-  const supabase = createServiceRoleClient() as any;
+  const supabase = createServiceRoleClient();
 
   let runId: string | null = null;
   if (payload.run) {
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
         status: payload.run.status ?? "complete",
         summary: payload.run.summary ?? null,
         output_count: payload.run.output_count ?? 0,
-        meta: payload.run.meta ?? {},
+        meta: (payload.run.meta ?? null) as Json | null,
         proof_url: payload.run.proof_url ?? null,
       })
       .select("id")

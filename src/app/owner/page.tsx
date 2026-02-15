@@ -279,15 +279,19 @@ export default function ClientPortalDashboard() {
         }
         if (Array.isArray(data?.tasks) && data.tasks.length > 0) {
           setTasksData(
-            data.tasks.map((t) => ({
-              id: t.id,
-              when: new Date(t.created_at).toLocaleString(),
-              title: t.title,
-              source: t.source ?? "",
-              output: t.output ?? "",
-              status: t.status ?? "complete",
-              proof_url: t.proof_url ?? "",
-            })),
+            data.tasks.map((t) => {
+              const validStatuses = ["complete", "needs_approval", "failed"];
+              const status = (validStatuses.includes(t.status ?? "") ? t.status : "complete") as TaskRow["status"];
+              return {
+                id: t.id,
+                when: new Date(t.created_at).toLocaleString(),
+                title: t.title,
+                source: t.source ?? "",
+                output: t.output ?? "",
+                status,
+                proof_url: t.proof_url ?? "",
+              };
+            }),
           );
         }
         if (Array.isArray(data?.leads) && data.leads.length > 0) {
