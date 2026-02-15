@@ -4,7 +4,7 @@ import { hasSessionCookie, logAuthDebug } from "@/lib/supabase/debug";
 import type { Database } from "@/types/supabase";
 
 const PROTECTED_PREFIXES = [
-  "/dashboard",
+  "/owner",
   "/companies",
   "/leads",
   "/tasks",
@@ -123,7 +123,7 @@ export const updateSession = async (request: NextRequest) => {
       sanitizeNext(request.nextUrl.searchParams.get("redirect")) ??
       sanitizeNext(request.nextUrl.searchParams.get("next"));
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = requestedNext || "/dashboard";
+    redirectUrl.pathname = requestedNext || "/owner";
     redirectUrl.searchParams.delete("next");
     redirectUrl.searchParams.delete("redirect");
     return applySupabaseCookies(response, NextResponse.redirect(redirectUrl));

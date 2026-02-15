@@ -17,7 +17,7 @@ import { UserChip } from "@/components/auth/UserChip";
 import { Input } from "@/components/ui/input";
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard", icon: Gauge },
+  { href: "/owner", label: "Owner", icon: Gauge },
   { href: "/companies", label: "Companies", icon: Building2 },
   { href: "/tasks", label: "Tasks", icon: ClipboardList },
   { href: "/settings", label: "Settings", icon: Settings },

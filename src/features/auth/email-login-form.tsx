@@ -8,11 +8,11 @@ import { UnderlitButton } from "@/components/primitives/underlit-button";
 
 const sanitizeNext = (value: string | null): string => {
   if (!value) {
-    return "/dashboard";
+    return "/owner";
   }
 
   if (!value.startsWith("/") || value.startsWith("//")) {
-    return "/dashboard";
+    return "/owner";
   }
 
   return value;
