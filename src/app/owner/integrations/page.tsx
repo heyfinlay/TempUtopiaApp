@@ -2,17 +2,25 @@ export default function OwnerIntegrations() {
   return (
     <div className="space-y-6">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-600">Integrations</p>
-        <h1 className="text-3xl font-semibold text-slate-900">Your current stack</h1>
-        <p className="mt-2 text-sm text-slate-600">We plug into what you already use.</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-cyan-300">Integrations</p>
+        <h1 className="text-3xl font-semibold text-white">Your current stack</h1>
+        <p className="mt-2 text-sm text-slate-300">We plug into what you already use.</p>
       </header>
 
       <div className="grid gap-4 md:grid-cols-2">
-        {["Website forms", "Instagram DMs", "Calendly / Calendar", "CRM / Sheets"].map((item) => (
-          <div key={item} className="rounded-2xl border border-slate-200 bg-white p-5">
-            <p className="text-sm text-slate-500">Connected</p>
-            <p className="mt-1 text-lg font-semibold text-slate-900">{item}</p>
-            <p className="mt-2 text-sm text-slate-600">We ingest messages and sync outcomes automatically.</p>
+        {[
+          { name: "Website forms", status: "Connected" },
+          { name: "Instagram DMs", status: "Connected" },
+          { name: "Calendly / Calendar", status: "Live sync" },
+          { name: "CRM / Sheets", status: "Synced" },
+        ].map((item) => (
+          <div key={item.name} className="glass-card rounded-3xl p-5">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{item.status}</p>
+            <p className="mt-2 text-lg font-semibold text-white">{item.name}</p>
+            <p className="mt-2 text-sm text-slate-300">We ingest messages and sync outcomes automatically.</p>
+            <div className="mt-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-cyan-200">
+              Healthy
+            </div>
           </div>
         ))}
       </div>

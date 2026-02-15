@@ -24,8 +24,9 @@ body {
 body {
   font-family: "Saira", "Rajdhani", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top right, rgba(14, 116, 144, 0.14), transparent 45%),
-    radial-gradient(circle at bottom left, rgba(185, 28, 28, 0.12), transparent 42%),
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.18), transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.2), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(244, 63, 94, 0.16), transparent 42%),
     var(--command-bg);
   color: #d8dee9;
 }
@@ -33,6 +34,49 @@ body {
 body.marketing-body {
   color: #0f172a;
   background: #ffffff;
+}
+
+.owner-shell {
+  background:
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.18), transparent 40%),
+    rgba(7, 11, 17, 0.98);
+}
+
+.glass-panel {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(13, 19, 28, 0.72);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+.glass-card {
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.62));
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+.glass-outline {
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: linear-gradient(135deg, rgba(14, 116, 144, 0.3), rgba(15, 23, 42, 0.6));
+}
+
+.tag-pill {
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  background: rgba(15, 118, 110, 0.2);
+  color: #a7f3d0;
+}
+
+.table-shell {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.table-row {
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  background: rgba(15, 23, 42, 0.55);
 }
 
 a {
