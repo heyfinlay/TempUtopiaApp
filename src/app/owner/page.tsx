@@ -224,6 +224,7 @@ export default function ClientPortalDashboard() {
               source: t.source ?? "",
               output: t.output ?? "",
               status: t.status ?? "complete",
+              proof_url: t.proof_url ?? "",
             })),
           );
         }
@@ -489,7 +490,19 @@ export default function ClientPortalDashboard() {
                             <td className="mono">{t.when}</td>
                             <td>{t.title}</td>
                             <td className="mono">{t.source}</td>
-                            <td className="mono">{t.output}</td>
+                            <td className="mono">
+                              {t.output}
+                              {t.proof_url ? (
+                                <a
+                                  href={t.proof_url}
+                                  className="block text-xs text-cyan-300 underline"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  View proof
+                                </a>
+                              ) : null}
+                            </td>
                             <td>
                               <StatusBadge status={t.status} />
                             </td>

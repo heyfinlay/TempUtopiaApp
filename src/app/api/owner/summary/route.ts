@@ -60,7 +60,7 @@ export async function GET() {
       .gte("created_at", since24),
     supabase
       .from("agent_tasks")
-      .select("id,created_at,title,source,output,status")
+      .select("id,created_at,title,source,output,status,proof_url")
       .eq("client_id", client.id)
       .order("created_at", { ascending: false })
       .limit(7),
