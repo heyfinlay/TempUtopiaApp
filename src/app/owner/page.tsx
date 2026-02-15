@@ -9,12 +9,10 @@ import {
   Download,
   ExternalLink,
   Filter,
-  Gauge,
   Home,
   Inbox,
   LifeBuoy,
   PauseCircle,
-  PlayCircle,
   Search,
   Settings,
   Sparkles,
@@ -23,7 +21,6 @@ import {
   CalendarDays,
   FileText,
   MessageSquare,
-  ArrowUpRight,
 } from "lucide-react";
 
 // Mock data

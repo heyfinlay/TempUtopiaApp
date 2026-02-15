@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Panel } from "@/components/primitives/panel";
 import { EmailLoginForm } from "@/features/auth/email-login-form";
 
@@ -26,7 +27,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       <Panel title="Login" subtitle="Sign in or create an account">
         <EmailLoginForm />
         <p className="mt-4 text-xs text-slate-400">
-          <a href="/" className="underline decoration-slate-500/60 underline-offset-4">Return to landing page</a>
+          <Link href="/" className="underline decoration-slate-500/60 underline-offset-4">Return to landing page</Link>
         </p>
 
         {error ? (
