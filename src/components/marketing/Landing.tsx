@@ -26,63 +26,45 @@ const navItems = [
 export function Landing() {
   useEffect(() => {
     document.body.classList.add("marketing-body")
-    return () => {
-      document.body.classList.remove("marketing-body")
-    }
+    return () => document.body.classList.remove("marketing-body")
   }, [])
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
-
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
   const handlePrimaryCta = () => {
     scrollTo("cta")
     focusLeadForm()
   }
-
-  const handleSecondaryCta = () => {
-    scrollTo("system-diagram")
-  }
+  const handleSecondaryCta = () => scrollTo("system-diagram")
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("#")) return
-
     e.preventDefault()
-    if (href === "#cta") {
-      handlePrimaryCta()
-      return
-    }
-
+    if (href === "#cta") return handlePrimaryCta()
     scrollTo(href.slice(1))
   }
 
   return (
-    <div className="min-h-screen text-slate-900">
-      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 shadow-[0_8px_30px_-24px_rgba(15,23,42,0.6)] backdrop-blur-md">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-800">
-            <Sparkles className="size-4 text-emerald-600" />
+    <div className="min-h-screen bg-marketing-bg text-marketing-text">
+      <header className="sticky top-0 z-40 border-b border-marketing-border/80 bg-marketing-bg/95 backdrop-blur">
+        <nav className="mk-container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2 text-sm font-medium tracking-[0.08em] text-marketing-text">
+            <Sparkles className="size-4 text-marketing-accent" />
             Temporary Utopia
           </div>
-          <div className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
+          <div className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mk-small rounded-md text-marketing-muted transition-colors hover:text-marketing-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-marketing-accent focus-visible:ring-offset-2"
               >
                 {item.label}
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <Button asChild size="sm" variant="outline" className="hidden md:inline-flex">
-              <Link href="#system-diagram" onClick={(e) => handleNavClick(e, "#system-diagram")}>
-                See How It Works
-              </Link>
-            </Button>
-            <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex">
+          <div className="flex items-center gap-2.5">
+            <Button asChild size="sm" variant="ghost" className="hidden sm:inline-flex">
               <Link href="/login">Sign in</Link>
             </Button>
             <Button asChild size="sm">
@@ -103,38 +85,28 @@ export function Landing() {
         <FinalCTASection onPrimaryClick={handlePrimaryCta} />
       </main>
 
-      <footer className="border-t border-slate-200 bg-white py-8 text-slate-600">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 px-4 sm:px-6 lg:flex-row lg:px-8">
-          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-slate-800">
-            <Sparkles className="size-4 text-emerald-600" />
+      <footer className="border-t border-marketing-border bg-marketing-surface py-8">
+        <div className="mk-container flex flex-col justify-between gap-4 lg:flex-row">
+          <div className="flex items-center gap-2 text-sm font-medium tracking-[0.08em] text-marketing-text">
+            <Sparkles className="size-4 text-marketing-accent" />
             Temporary Utopia
           </div>
-          <div className="flex gap-6 text-sm">
+          <div className="flex flex-wrap gap-5">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                className="mk-small text-marketing-muted transition-colors hover:text-marketing-text"
               >
                 {item.label}
               </a>
             ))}
-            <a
-              href="/login"
-              className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            >
+            <a href="/login" className="mk-small text-marketing-muted transition-colors hover:text-marketing-text">
               Sign in
             </a>
-            <a
-              href="#cta"
-              onClick={(e) => handleNavClick(e, "#cta")}
-              className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            >
-              Book Audit
-            </a>
           </div>
-          <p className="text-xs text-slate-500">Automated lead systems that turn enquiries into booked calls.</p>
+          <p className="mk-small mk-muted">Automated lead systems that turn enquiries into booked calls.</p>
         </div>
       </footer>
     </div>
