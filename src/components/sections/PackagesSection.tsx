@@ -13,24 +13,27 @@ const packages = [
   {
     name: "Starter",
     description: "For businesses who want fast follow-up",
+    details: "Best when you need immediate response coverage across core enquiry channels.",
     includes: ["AI replies", "basic qualification", "booking integration"],
   },
   {
     name: "Growth",
     description: "For businesses with consistent enquiries",
+    details: "Adds reminder cadence and clearer reporting for teams handling regular lead flow.",
     includes: ["everything in Starter", "reminders", "dashboard", "reporting"],
   },
   {
     name: "Scale",
     description: "For teams and multi-location businesses",
+    details: "Designed for complex workflows where speed, routing and accountability all matter.",
     includes: ["everything in Growth", "custom workflows", "multi-agent handling", "deeper reporting"],
   },
 ]
 
 export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
   return (
-    <section id="packages" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
+    <section id="packages" className="m-section relative">
+      <div className="m-container space-y-8">
         <Reveal>
           <SectionIntro
             title="Simple packages"
@@ -39,33 +42,29 @@ export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
           />
         </Reveal>
         <Reveal delay={0.03}>
-          <p className="rounded-xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm text-slate-700 shadow-[0_18px_30px_-26px_rgba(15,23,42,0.4)]">
+          <p className="m-body rounded-xl border border-[var(--m-border)] bg-[var(--m-surface)] px-4 py-3 text-[color:var(--m-text-muted)]">
             Most clients invest between $X and $Y depending on setup.
           </p>
         </Reveal>
         <div className="grid gap-6 md:grid-cols-3">
           {packages.map((tier, idx) => (
             <Reveal key={tier.name} delay={idx * 0.04}>
-              <Card
-                className={
-                  idx === 1
-                    ? "border-emerald-200 bg-emerald-50/90 shadow-[0_24px_50px_-30px_rgba(16,185,129,0.45)]"
-                    : "border-slate-200/80 bg-white/90 shadow-[0_22px_44px_-30px_rgba(15,23,42,0.4)]"
-                }
-              >
-                <CardHeader className="space-y-2">
-                  <CardTitle className={idx === 1 ? "text-emerald-900" : "text-slate-900"}>
-                    {tier.name} — {tier.description}
+              <Card className={idx === 1 ? "h-full border-emerald-200 bg-emerald-50/70" : "h-full"}>
+                <CardHeader className="space-y-3">
+                  <CardTitle>
+                    {tier.name}
                   </CardTitle>
+                  <p className="m-body text-[color:var(--m-text)]">{tier.description}</p>
+                  <p className="text-[length:var(--m-text-sm)] text-[color:var(--m-text-muted)]">{tier.details}</p>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {tier.includes.map((item) => (
-                    <div key={item} className={idx === 1 ? "flex gap-2 text-sm text-emerald-900" : "flex gap-2 text-sm text-slate-700"}>
+                    <div key={item} className="flex gap-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text)]">
                       <Check className="mt-0.5 size-4 text-emerald-600" />
                       <span>{item}</span>
                     </div>
                   ))}
-                  <Button onClick={onBookAudit} className="mt-3 w-full">
+                  <Button onClick={onBookAudit} className="mt-4 w-full">
                     Book Audit
                   </Button>
                 </CardContent>
