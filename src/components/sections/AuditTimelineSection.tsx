@@ -20,8 +20,8 @@ const timeline = [
 
 export function AuditTimelineSection() {
   return (
-    <section id="audit-timeline" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
+    <section id="audit-timeline" className="m-section relative">
+      <div className="m-container space-y-8">
         <Reveal>
           <SectionIntro
             title="What happens when you book a free audit"
@@ -32,13 +32,13 @@ export function AuditTimelineSection() {
         <div className="grid gap-6 md:grid-cols-3">
           {timeline.map((step, idx) => (
             <Reveal key={step.title} delay={idx * 0.04}>
-              <Card className="border-slate-200/80 bg-white/90 shadow-[0_18px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80">
+              <Card className="border-[var(--m-border)]/80 bg-[var(--m-surface)]/95 shadow-[0_18px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--m-border)]/80">
                 <CardHeader className="space-y-3">
-                  <Badge variant="outline" className="w-fit border-emerald-200 bg-emerald-50 text-emerald-700">
+                  <Badge variant="outline" className="w-fit border-[var(--m-border)] bg-emerald-50 text-[color:var(--m-accent)]">
                     {String(idx + 1).padStart(2, "0")}
                   </Badge>
-                  <CardTitle className="text-slate-900">{step.title} —</CardTitle>
-                  <CardDescription className="text-slate-600">{step.description}</CardDescription>
+                  <CardTitle className="text-[color:var(--m-text)]">{step.title} —</CardTitle>
+                  <CardDescription className="text-[color:var(--m-text-muted)]">{step.description}</CardDescription>
                 </CardHeader>
               </Card>
             </Reveal>

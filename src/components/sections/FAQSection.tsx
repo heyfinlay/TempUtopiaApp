@@ -31,18 +31,18 @@ const faqItems = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="m-section relative">
+      <div className="m-container space-y-8">
         <Reveal>
           <SectionIntro title="Questions people usually ask" eyebrow="FAQ" />
         </Reveal>
         <div className="grid gap-4 md:grid-cols-2">
           {faqItems.map((item, idx) => (
             <Reveal key={item.question} delay={idx * 0.03}>
-              <Card className="border-slate-200/80 bg-white/90 shadow-[0_16px_36px_-26px_rgba(15,23,42,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80">
+              <Card className="border-[var(--m-border)]/80 bg-[var(--m-surface)]/95 shadow-[0_16px_36px_-26px_rgba(15,23,42,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--m-border)]/80">
                 <CardHeader className="space-y-2">
-                  <CardTitle className="text-slate-900">{item.question}</CardTitle>
-                  <CardDescription className="text-slate-600">{item.answer}</CardDescription>
+                  <CardTitle className="text-[color:var(--m-text)]">{item.question}</CardTitle>
+                  <CardDescription className="text-[color:var(--m-text-muted)]">{item.answer}</CardDescription>
                 </CardHeader>
               </Card>
             </Reveal>

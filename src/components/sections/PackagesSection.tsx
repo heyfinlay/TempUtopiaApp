@@ -29,8 +29,8 @@ const packages = [
 
 export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
   return (
-    <section id="packages" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
+    <section id="packages" className="m-section relative">
+      <div className="m-container space-y-8">
         <Reveal>
           <SectionIntro
             title="Simple packages"
@@ -39,7 +39,7 @@ export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
           />
         </Reveal>
         <Reveal delay={0.03}>
-          <p className="rounded-xl border border-slate-200/90 bg-white/90 px-4 py-3 text-sm text-slate-700 shadow-[0_18px_30px_-26px_rgba(15,23,42,0.4)]">
+          <p className="rounded-xl border border-[var(--m-border)]/90 bg-[var(--m-surface)]/95 px-4 py-3 text-sm text-[color:var(--m-text)] shadow-[0_18px_30px_-26px_rgba(15,23,42,0.4)]">
             Most clients invest between $X and $Y depending on setup.
           </p>
         </Reveal>
@@ -49,18 +49,18 @@ export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
               <Card
                 className={
                   idx === 1
-                    ? "border-emerald-200 bg-emerald-50/90 shadow-[0_24px_50px_-30px_rgba(16,185,129,0.45)]"
-                    : "border-slate-200/80 bg-white/90 shadow-[0_22px_44px_-30px_rgba(15,23,42,0.4)]"
+                    ? "border-[var(--m-border)] bg-emerald-50/90 shadow-[0_24px_50px_-30px_rgba(16,185,129,0.45)]"
+                    : "border-[var(--m-border)]/80 bg-[var(--m-surface)]/95 shadow-[0_22px_44px_-30px_rgba(15,23,42,0.4)]"
                 }
               >
                 <CardHeader className="space-y-2">
-                  <CardTitle className={idx === 1 ? "text-emerald-900" : "text-slate-900"}>
+                  <CardTitle className={idx === 1 ? "text-[color:var(--m-text)]" : "text-[color:var(--m-text)]"}>
                     {tier.name} — {tier.description}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {tier.includes.map((item) => (
-                    <div key={item} className={idx === 1 ? "flex gap-2 text-sm text-emerald-900" : "flex gap-2 text-sm text-slate-700"}>
+                    <div key={item} className={idx === 1 ? "flex gap-2 text-sm text-[color:var(--m-text)]" : "flex gap-2 text-sm text-[color:var(--m-text)]"}>
                       <Check className="mt-0.5 size-4 text-emerald-600" />
                       <span>{item}</span>
                     </div>

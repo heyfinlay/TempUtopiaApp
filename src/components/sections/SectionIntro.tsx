@@ -9,14 +9,14 @@ type SectionIntroProps = {
 
 export function SectionIntro({ title, subtitle, eyebrow, className }: SectionIntroProps) {
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-4", className)}>
       {eyebrow ? (
-        <p className="w-fit rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-800">
+        <p className="inline-flex rounded-full border border-[var(--m-border)] bg-[var(--m-surface-soft)] px-3 py-1 m-overline text-[color:var(--m-text-muted)]">
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="max-w-4xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">{title}</h2>
-      {subtitle ? <p className="max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">{subtitle}</p> : null}
+      <h2 className="m-h2 max-w-4xl">{title}</h2>
+      {subtitle ? <p className="m-body m-muted max-w-3xl">{subtitle}</p> : null}
     </div>
   )
 }

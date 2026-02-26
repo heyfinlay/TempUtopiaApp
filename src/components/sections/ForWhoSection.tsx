@@ -20,8 +20,8 @@ const notIdealFor = [
 
 export function ForWhoSection() {
   return (
-    <section id="for-who" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
+    <section id="for-who" className="m-section relative">
+      <div className="m-container space-y-8">
         <Reveal>
           <SectionIntro
             title="This is built for businesses that sell with conversations."
@@ -31,13 +31,13 @@ export function ForWhoSection() {
         </Reveal>
         <div className="grid gap-6 md:grid-cols-2">
           <Reveal>
-            <Card className="border-slate-200/80 bg-white/90 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_24px_52px_-28px_rgba(16,185,129,0.32)]">
+            <Card className="border-[var(--m-border)]/80 bg-[var(--m-surface)]/95 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--m-border)]/80 hover:shadow-[0_24px_52px_-28px_rgba(16,185,129,0.32)]">
               <CardHeader>
-                <CardTitle className="text-slate-900">Perfect for</CardTitle>
+                <CardTitle className="text-[color:var(--m-text)]">Perfect for</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {perfectFor.map((item) => (
-                  <div key={item} className="flex gap-2 text-sm text-slate-700">
+                  <div key={item} className="flex gap-2 text-sm text-[color:var(--m-text)]">
                     <Check className="mt-0.5 size-4 text-emerald-600" />
                     <span>{item}</span>
                   </div>
@@ -46,13 +46,13 @@ export function ForWhoSection() {
             </Card>
           </Reveal>
           <Reveal delay={0.06}>
-            <Card className="border-slate-200/80 bg-slate-50/90 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_24px_52px_-28px_rgba(15,23,42,0.3)]">
+            <Card className="border-[var(--m-border)]/80 bg-[var(--m-surface-soft)]/90 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_24px_52px_-28px_rgba(15,23,42,0.3)]">
               <CardHeader>
-                <CardTitle className="text-slate-900">Not ideal for</CardTitle>
+                <CardTitle className="text-[color:var(--m-text)]">Not ideal for</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {notIdealFor.map((item) => (
-                  <div key={item} className="flex gap-2 text-sm text-slate-700">
+                  <div key={item} className="flex gap-2 text-sm text-[color:var(--m-text)]">
                     <Minus className="mt-0.5 size-4 text-slate-500" />
                     <span>{item}</span>
                   </div>

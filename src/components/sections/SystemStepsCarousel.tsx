@@ -72,13 +72,13 @@ export function SystemStepsCarousel() {
   }, [])
 
   return (
-    <section id="system-diagram" className="relative py-24 md:py-28">
-      <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6 lg:px-8">
+    <section id="system-diagram" className="m-section relative">
+      <div className="m-container space-y-6">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">System Steps</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Here’s the system we install.</h2>
-            <p className="max-w-2xl text-slate-600">
+            <p className="m-overline">System Steps</p>
+            <h2 className="m-h2">Here’s the system we install.</h2>
+            <p className="m-body m-muted max-w-2xl">
               Swipe through the exact 6-step process that turns a new enquiry into a booked call.
             </p>
           </div>
@@ -108,15 +108,15 @@ export function SystemStepsCarousel() {
           </div>
         </Reveal>
 
-        <Reveal className="rounded-3xl border border-slate-200/80 bg-white/90 p-4 shadow-[0_22px_52px_-34px_rgba(15,23,42,0.4)] backdrop-blur-sm sm:p-5 md:p-6" delay={0.05}>
+        <Reveal className="m-card p-4 sm:p-5 md:p-6" delay={0.05}>
           <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700">
                 Lead → Booked Call
               </Badge>
-              <p className="text-sm text-slate-500 md:hidden">Swipe to explore</p>
+              <p className="text-[var(--m-text-sm)] m-muted md:hidden">Swipe to explore</p>
             </div>
-            <p className="text-sm font-medium text-slate-700">
+            <p className="text-[var(--m-text-sm)] font-medium text-[color:var(--m-text)]">
               Step {activeStep + 1} / {totalSteps}
             </p>
           </div>
@@ -136,7 +136,7 @@ export function SystemStepsCarousel() {
               >
                 <Card
                   className={cn(
-                    "h-full border-slate-200/80 bg-white/90 shadow-[0_14px_34px_-26px_rgba(15,23,42,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_20px_45px_-24px_rgba(16,185,129,0.38)]",
+                    "m-card h-full transition-all duration-300 hover:-translate-y-1",
                     activeStep === index && "border-emerald-300"
                   )}
                 >
@@ -150,8 +150,8 @@ export function SystemStepsCarousel() {
                     >
                       Step {index + 1}
                     </Badge>
-                    <CardTitle className="text-xl leading-tight text-slate-900">{step.title}</CardTitle>
-                    <CardDescription className="text-base leading-relaxed text-slate-600">{step.description}</CardDescription>
+                    <CardTitle className="m-h3">{step.title}</CardTitle>
+                    <CardDescription className="m-body m-muted">{step.description}</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="h-1.5 w-full rounded-full bg-slate-100">
