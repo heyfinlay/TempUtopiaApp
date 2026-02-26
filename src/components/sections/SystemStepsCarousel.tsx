@@ -114,9 +114,9 @@ export function SystemStepsCarousel() {
               <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700">
                 Lead → Booked Call
               </Badge>
-              <p className="text-[var(--m-text-sm)] m-muted md:hidden">Swipe to explore</p>
+              <p className="text-[length:var(--m-text-sm)] m-muted md:hidden">Swipe to explore</p>
             </div>
-            <p className="text-[var(--m-text-sm)] font-medium text-[color:var(--m-text)]">
+            <p className="text-[length:var(--m-text-sm)] font-medium text-[color:var(--m-text)]">
               Step {activeStep + 1} / {totalSteps}
             </p>
           </div>

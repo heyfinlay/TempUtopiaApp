@@ -61,11 +61,11 @@ export function Landing() {
     <div className="min-h-screen bg-[var(--m-bg)] text-[color:var(--m-text)]">
       <header className="sticky top-0 z-40 border-b border-[var(--m-border)] bg-white/90 backdrop-blur-md">
         <nav className="m-container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 text-[var(--m-text-sm)] font-semibold uppercase tracking-[0.14em] text-[color:var(--m-text)]">
+          <div className="flex items-center gap-2 text-[length:var(--m-text-sm)] font-semibold uppercase tracking-[0.14em] text-[color:var(--m-text)]">
             <Sparkles className="size-4 text-[var(--m-accent)]" />
             Temporary Utopia
           </div>
-          <div className="hidden items-center gap-6 text-[var(--m-text-sm)] text-[color:var(--m-text-muted)] md:flex">
+          <div className="hidden items-center gap-6 text-[length:var(--m-text-sm)] text-[color:var(--m-text-muted)] md:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -107,11 +107,11 @@ export function Landing() {
 
       <footer className="border-t border-[var(--m-border)] bg-white py-10 text-[color:var(--m-text-muted)]">
         <div className="m-container flex flex-col justify-between gap-4 lg:flex-row">
-          <div className="flex items-center gap-2 text-[var(--m-text-sm)] font-semibold uppercase tracking-[0.16em] text-[color:var(--m-text)]">
+          <div className="flex items-center gap-2 text-[length:var(--m-text-sm)] font-semibold uppercase tracking-[0.16em] text-[color:var(--m-text)]">
             <Sparkles className="size-4 text-[var(--m-accent)]" />
             Temporary Utopia
           </div>
-          <div className="flex gap-6 text-[var(--m-text-sm)]">
+          <div className="flex gap-6 text-[length:var(--m-text-sm)]">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -129,7 +129,7 @@ export function Landing() {
               Book Audit
             </a>
           </div>
-          <p className="text-[var(--m-text-sm)]">Automated lead systems that turn enquiries into booked calls.</p>
+          <p className="text-[length:var(--m-text-sm)]">Automated lead systems that turn enquiries into booked calls.</p>
         </div>
       </footer>
     </div>

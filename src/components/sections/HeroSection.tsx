@@ -25,7 +25,7 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               <p className="m-body m-muted max-w-xl">
                 We install an AI follow-up system that replies instantly, qualifies leads, and books appointments while you run your business.
               </p>
-              <p className="m-body text-[var(--m-text-muted)]">No contracts. No complicated software. Setup in days.</p>
+              <p className="m-body text-[color:var(--m-text-muted)]">No contracts. No complicated software. Setup in days.</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -43,20 +43,20 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
           <Reveal className="relative pb-6 lg:pb-10" delay={0.1}>
             <Card>
               <CardHeader className="space-y-1 pb-4">
-                <CardTitle className="flex items-center gap-2 !text-[var(--m-text-body)]">
+                <CardTitle className="flex items-center gap-2 !text-[length:var(--m-text-body)]">
                   <MessageCircle className="size-4 text-[var(--m-accent)]" />
                   Lead message conversation
                 </CardTitle>
                 <CardDescription>New lead on website chat</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-[var(--m-surface-soft)] px-3 py-2 text-[var(--m-text-sm)] text-[color:var(--m-text-muted)]">
+                <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-[var(--m-surface-soft)] px-3 py-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text-muted)]">
                   Hi, can you help with this week?
                 </div>
-                <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-[var(--m-success-bg)] px-3 py-2 text-[var(--m-text-sm)] text-[color:var(--m-text)]">
+                <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-[var(--m-success-bg)] px-3 py-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text)]">
                   Yes. We can help. Want to book a quick call?
                 </div>
-                <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-[var(--m-success-bg)] px-3 py-2 text-[var(--m-text-sm)] text-[color:var(--m-text)]">
+                <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-[var(--m-success-bg)] px-3 py-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text)]">
                   Here are two times today.
                 </div>
               </CardContent>
@@ -64,13 +64,13 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
 
             <Card className="mt-4 lg:-mt-6 lg:ml-10">
               <CardHeader className="space-y-1 pb-3">
-                <CardTitle className="flex items-center gap-2 !text-[var(--m-text-body)]">
+                <CardTitle className="flex items-center gap-2 !text-[length:var(--m-text-body)]">
                   <CalendarCheck2 className="size-4 text-[var(--m-accent)]" />
                   Booking confirmation
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="rounded-xl border border-[var(--m-border)] bg-[var(--m-success-bg)] p-3 text-[var(--m-text-sm)] text-[color:var(--m-text)]">
+                <div className="rounded-xl border border-[var(--m-border)] bg-[var(--m-success-bg)] p-3 text-[length:var(--m-text-sm)] text-[color:var(--m-text)]">
                   Call booked for Tuesday at 10:30 AM
                 </div>
               </CardContent>
@@ -78,12 +78,12 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
 
             <Card className="mt-4 lg:-mt-6 lg:mr-8">
               <CardHeader className="space-y-1 pb-3">
-                <CardTitle className="flex items-center gap-2 !text-[var(--m-text-body)]">
+                <CardTitle className="flex items-center gap-2 !text-[length:var(--m-text-body)]">
                   <BarChart3 className="size-4 text-[var(--m-accent)]" />
                   Dashboard summary
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2 text-[var(--m-text-sm)] text-[color:var(--m-text-muted)]">
+              <CardContent className="space-y-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text-muted)]">
                 <div className="flex items-center justify-between rounded-lg border border-[var(--m-border)] px-3 py-2">
                   <span>New enquiries</span>
                   <span className="font-semibold text-[color:var(--m-text)]">18</span>

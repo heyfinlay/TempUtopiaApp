@@ -32,7 +32,7 @@ export function FinalCTASection({ onPrimaryClick }: FinalCTASectionProps) {
             <div className="flex flex-wrap gap-3">
               <Button onClick={onPrimaryClick}>Start the audit flow</Button>
             </div>
-            <div className="space-y-2 text-[var(--m-text-sm)] text-[color:var(--m-text-muted)]">
+            <div className="space-y-2 text-[length:var(--m-text-sm)] text-[color:var(--m-text-muted)]">
               <p>1. Choose business type and goal</p>
               <p>2. Add contact details</p>
               <p>3. Pick your booking preference and submit</p>
@@ -43,7 +43,7 @@ export function FinalCTASection({ onPrimaryClick }: FinalCTASectionProps) {
             <LeadIntakeForm />
             <div className="rounded-xl border border-[var(--m-border)] bg-white p-4">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[var(--m-text-sm)] font-medium text-[color:var(--m-text)]">Want monthly playbooks?</span>
+                <span className="text-[length:var(--m-text-sm)] font-medium text-[color:var(--m-text)]">Want monthly playbooks?</span>
                 <Sparkles className="size-4 text-emerald-600" />
               </div>
               <p className="mt-1 text-sm text-[color:var(--m-text-muted)]">One practical growth update each month.</p>
