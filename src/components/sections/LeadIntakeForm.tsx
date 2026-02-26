@@ -201,7 +201,7 @@ export function LeadIntakeForm() {
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Book an Audit</p>
-          <p className="text-sm font-medium text-slate-700">
+          <p className="mk-small text-marketing-text">
             Step {step} of {totalSteps}
           </p>
         </div>
@@ -229,7 +229,7 @@ export function LeadIntakeForm() {
         </div>
       ) : null}
       {status === "error" ? (
-        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{message}</div>
+        <div className="rounded-[var(--mk-radius-sm)] border border-red-200 bg-red-50 p-4 mk-small text-red-700">{message}</div>
       ) : null}
 
       <AnimatePresence mode="wait" initial={false}>
@@ -244,8 +244,8 @@ export function LeadIntakeForm() {
           {step === 1 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">What type of business are you?</p>
-                <p className="text-sm text-slate-600">Choose the closest option.</p>
+                <p className="mk-body font-medium text-marketing-text">What type of business are you?</p>
+                <p className="mk-small mk-muted">Choose the closest option.</p>
               </div>
               <div className="grid gap-2">
                 {businessTypes.map((type, idx) => {
@@ -257,10 +257,10 @@ export function LeadIntakeForm() {
                       id={idx === 0 ? "business-type-0" : undefined}
                       onClick={() => setField("businessType", type)}
                       className={cn(
-                        "rounded-xl border px-4 py-3 text-left text-sm transition-all duration-200",
+                        "rounded-[var(--mk-radius-sm)] border px-4 py-3 text-left mk-small transition-colors",
                         active
-                          ? "border-emerald-300 bg-emerald-50 text-emerald-900 shadow-[0_12px_24px_-18px_rgba(16,185,129,0.55)]"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                          ? "border-marketing-accent bg-marketing-accent-soft text-teal-950"
+                          : "border-marketing-border bg-marketing-surface text-marketing-text hover:bg-marketing-surface-soft"
                       )}
                     >
                       {type}
@@ -275,8 +275,8 @@ export function LeadIntakeForm() {
           {step === 2 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">What is your main goal right now?</p>
-                <p className="text-sm text-slate-600">We will tailor the audit to this outcome.</p>
+                <p className="mk-body font-medium text-marketing-text">What is your main goal right now?</p>
+                <p className="mk-small mk-muted">We will tailor the audit to this outcome.</p>
               </div>
               <div className="grid gap-2">
                 {primaryGoals.map((goal) => {
@@ -287,10 +287,10 @@ export function LeadIntakeForm() {
                       key={goal}
                       onClick={() => setField("primaryGoal", goal)}
                       className={cn(
-                        "rounded-xl border px-4 py-3 text-left text-sm transition-all duration-200",
+                        "rounded-[var(--mk-radius-sm)] border px-4 py-3 text-left mk-small transition-colors",
                         active
-                          ? "border-emerald-300 bg-emerald-50 text-emerald-900 shadow-[0_12px_24px_-18px_rgba(16,185,129,0.55)]"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                          ? "border-marketing-accent bg-marketing-accent-soft text-teal-950"
+                          : "border-marketing-border bg-marketing-surface text-marketing-text hover:bg-marketing-surface-soft"
                       )}
                     >
                       {goal}
@@ -305,8 +305,8 @@ export function LeadIntakeForm() {
           {step === 3 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">Your contact details</p>
-                <p className="text-sm text-slate-600">So we can send your audit plan.</p>
+                <p className="mk-body font-medium text-marketing-text">Your contact details</p>
+                <p className="mk-small mk-muted">So we can send your audit plan.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="wizard-business-name">Business name</Label>
@@ -360,8 +360,8 @@ export function LeadIntakeForm() {
           {step === 4 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">How would you like to book?</p>
-                <p className="text-sm text-slate-600">Pick the easiest path for your schedule.</p>
+                <p className="mk-body font-medium text-marketing-text">How would you like to book?</p>
+                <p className="mk-small mk-muted">Pick the easiest path for your schedule.</p>
               </div>
               <div className="grid gap-2">
                 {bookingOptions.map((option) => {
@@ -374,12 +374,12 @@ export function LeadIntakeForm() {
                       className={cn(
                         "rounded-xl border px-4 py-3 text-left transition-all duration-200",
                         active
-                          ? "border-emerald-300 bg-emerald-50 text-emerald-900 shadow-[0_12px_24px_-18px_rgba(16,185,129,0.55)]"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                          ? "border-marketing-accent bg-marketing-accent-soft text-teal-950"
+                          : "border-marketing-border bg-marketing-surface text-marketing-text hover:bg-marketing-surface-soft"
                       )}
                     >
                       <p className="text-sm font-semibold">{option.title}</p>
-                      <p className="text-xs text-slate-600">{option.description}</p>
+                      <p className="mk-small mk-muted">{option.description}</p>
                     </button>
                   )
                 })}
@@ -405,35 +405,35 @@ export function LeadIntakeForm() {
           {step === 5 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">Confirm your request</p>
-                <p className="text-sm text-slate-600">Review your details, then submit.</p>
+                <p className="mk-body font-medium text-marketing-text">Confirm your request</p>
+                <p className="mk-small mk-muted">Review your details, then submit.</p>
               </div>
-              <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
+              <div className="space-y-2 rounded-[var(--mk-radius-sm)] border border-marketing-border bg-marketing-surface-soft p-4 mk-small text-marketing-text">
                 <p>
-                  <span className="font-semibold text-slate-900">Business type:</span> {values.businessType}
+                  <span className="font-medium text-marketing-text">Business type:</span> {values.businessType}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Primary goal:</span> {values.primaryGoal}
+                  <span className="font-medium text-marketing-text">Primary goal:</span> {values.primaryGoal}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Business:</span> {values.businessName}
+                  <span className="font-medium text-marketing-text">Business:</span> {values.businessName}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Name:</span> {values.contactName}
+                  <span className="font-medium text-marketing-text">Name:</span> {values.contactName}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Email:</span> {values.email}
+                  <span className="font-medium text-marketing-text">Email:</span> {values.email}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Phone:</span> {values.phone || "Not provided"}
+                  <span className="font-medium text-marketing-text">Phone:</span> {values.phone || "Not provided"}
                 </p>
                 <p>
-                  <span className="font-semibold text-slate-900">Booking:</span>{" "}
+                  <span className="font-medium text-marketing-text">Booking:</span>{" "}
                   {values.bookingPreference === "redirect_calendar" ? "Redirect to calendar" : "Share call times"}
                 </p>
                 {values.bookingPreference === "share_times" && values.preferredTimes ? (
                   <p>
-                    <span className="font-semibold text-slate-900">Preferred times:</span> {values.preferredTimes}
+                    <span className="font-medium text-marketing-text">Preferred times:</span> {values.preferredTimes}
                   </p>
                 ) : null}
               </div>
@@ -465,7 +465,7 @@ export function LeadIntakeForm() {
                 </Button>
               )}
             </div>
-            <p className="text-xs text-slate-500">Takes about 60 seconds. We reply within one business day.</p>
+            <p className="mk-small mk-muted">Takes about 60 seconds. We reply within one business day.</p>
           </div>
         </motion.div>
       </AnimatePresence>
