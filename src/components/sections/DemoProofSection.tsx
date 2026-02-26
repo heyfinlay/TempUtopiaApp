@@ -33,7 +33,7 @@ export function DemoProofSection() {
             eyebrow="Demo Proof"
           />
         </Reveal>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {proofCards.map((card, idx) => (
             <Reveal key={card.title} delay={idx * 0.04}>
               <Card className="h-full transition-all duration-300 hover:-translate-y-1">

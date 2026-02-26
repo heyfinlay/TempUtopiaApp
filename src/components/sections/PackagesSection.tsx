@@ -46,7 +46,7 @@ export function PackagesSection({ onBookAudit }: PackagesSectionProps) {
             Most clients invest between $X and $Y depending on setup.
           </p>
         </Reveal>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {packages.map((tier, idx) => (
             <Reveal key={tier.name} delay={idx * 0.04}>
               <Card className={idx === 1 ? "h-full border-emerald-200 bg-emerald-50/70" : "h-full"}>
