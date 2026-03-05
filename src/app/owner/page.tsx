@@ -8,23 +8,20 @@ import {
   Clock,
   Download,
   ExternalLink,
-  Filter,
   Home,
   Inbox,
   LifeBuoy,
-  PauseCircle,
   Search,
-  Settings,
   Sparkles,
   Target,
-  Wand2,
   CalendarDays,
   FileText,
-  MessageSquare,
+  LineChart,
+  Plug,
 } from "lucide-react";
 
 // Mock data
-type TaskRow = {
+ type TaskRow = {
   id: string;
   when: string;
   title: string;
@@ -46,47 +43,47 @@ type LeadRow = {
 
 const MOCK_TASKS: TaskRow[] = [
   {
-    id: "T-1042",
-    when: "Today 09:12",
-    title: "Find 10 new cosmetic clinics in Melbourne",
-    source: "Google Maps",
-    output: "+12 leads",
+    id: "T-2042",
+    when: "Today 08:30",
+    title: "Inbox briefing + action items",
+    source: "Inbox Operator",
+    output: "6 actions",
     status: "complete",
     proof_url: "",
   },
   {
-    id: "T-1041",
-    when: "Yesterday 18:40",
-    title: "Draft outreach messages (approval required)",
-    source: "Templates",
-    output: "12 queued",
+    id: "T-2041",
+    when: "Yesterday 17:10",
+    title: "Draft proposal for Redwood Advisory",
+    source: "Proposal Operator",
+    output: "Draft ready",
     status: "needs_approval",
     proof_url: "",
   },
   {
-    id: "T-1040",
+    id: "T-2040",
     when: "Yesterday 09:06",
-    title: "Enrich leads with website + socials",
-    source: "Web",
-    output: "+18 enriched",
+    title: "Update CRM opportunities",
+    source: "CRM Operator",
+    output: "+5 updates",
     status: "complete",
     proof_url: "",
   },
   {
-    id: "T-1038",
+    id: "T-2038",
     when: "Mon 09:11",
-    title: "Search for “dentist + Invisalign” clinics",
-    source: "Google",
-    output: "+21 leads",
+    title: "Draft weekly client report",
+    source: "Reporting Operator",
+    output: "1 draft",
     status: "complete",
     proof_url: "",
   },
   {
-    id: "T-1032",
+    id: "T-2032",
     when: "Sun 10:00",
-    title: "Generate weekly report",
-    source: "Internal",
-    output: "1 PDF",
+    title: "Scope creep monitor",
+    source: "Monitoring Operator",
+    output: "1 alert",
     status: "failed",
     proof_url: "",
   },
@@ -94,44 +91,37 @@ const MOCK_TASKS: TaskRow[] = [
 
 const MOCK_LEADS: LeadRow[] = [
   {
-    id: "L-2001",
-    company: "Vogue Aesthetics",
-    meta: "Richmond • 14 staff",
-    channel: "Instagram",
+    id: "E-3001",
+    company: "Redwood Advisory",
+    meta: "Retainer client",
+    channel: "Email",
     fitScore: 91,
-    reason: "Runs ads, high-end branding, strong reviews",
-    originTask: "T-1042",
+    reason: "Proposal approved — awaiting sign-off",
+    originTask: "T-2041",
   },
   {
-    id: "L-2002",
-    company: "Northside Cosmetic Clinic",
-    meta: "Brunswick • 9 staff",
-    channel: "Website",
+    id: "E-3002",
+    company: "Northside Capital",
+    meta: "Project engagement",
+    channel: "CRM",
     fitScore: 74,
-    reason: "Good services, weak follow-up funnel",
-    originTask: "T-1042",
+    reason: "Weekly reporting sent",
+    originTask: "T-2038",
   },
   {
-    id: "L-2003",
-    company: "Glow Medispa",
-    meta: "South Yarra • 6 staff",
-    channel: "Facebook",
+    id: "E-3003",
+    company: "Harbour Strategy",
+    meta: "Discovery",
+    channel: "Calendar",
     fitScore: 88,
-    reason: "High engagement, inconsistent booking system",
-    originTask: "T-1038",
+    reason: "Follow-up drafted",
+    originTask: "T-2040",
   },
 ];
 
 type TaskStatus = TaskRow["status"];
 
-type NavKey =
-  | "overview"
-  | "tasks"
-  | "leads"
-  | "outreach"
-  | "schedule"
-  | "settings"
-  | "support";
+type NavKey = "overview" | "work" | "engagements" | "reports" | "integrations" | "support";
 
 function StatusBadge({ status }: { status: TaskStatus }) {
   const map: Record<
@@ -165,11 +155,7 @@ function NavItem({
   onClick: () => void;
 }) {
   return (
-    <button
-      onClick={onClick}
-      className={`nav-link ${active ? "active" : ""}`}
-      type="button"
-    >
+    <button onClick={onClick} className={`nav-link ${active ? "active" : ""}`} type="button">
       <span className="nav-left">
         <span className="nav-ico">{icon}</span>
         <span className="nav-label">{label}</span>
@@ -181,23 +167,20 @@ function NavItem({
 
 export default function ClientPortalDashboard() {
   const [activeNav, setActiveNav] = React.useState<NavKey>("overview");
-  const [industry, setIndustry] = React.useState("Cosmetic clinics");
-  const [location, setLocation] = React.useState("Melbourne, VIC");
-  const [maxOutreach, setMaxOutreach] = React.useState("15");
+  const [industry, setIndustry] = React.useState("Professional services");
+  const [location, setLocation] = React.useState("Australia");
   const [approvalRequired, setApprovalRequired] = React.useState(true);
-  const [excludeKeywords, setExcludeKeywords] = React.useState(
-    "bulk billing, student clinic, low-cost, franchise",
-  );
+  const [excludeKeywords, setExcludeKeywords] = React.useState("low-fit, out-of-scope, low-value");
   const [offerFocus, setOfferFocus] = React.useState(
-    "We build AI-powered lead systems that turn DMs and enquiries into booked calls & more sales.",
+    "We install AI operators that protect billable time — inbox, proposals, CRM, reporting.",
   );
   const [agentRunning, setAgentRunning] = React.useState(true);
   const [searchQuery, setSearchQuery] = React.useState("");
   const [metrics, setMetrics] = React.useState({
-    leads24h: 18,
-    queued24h: 12,
-    replies24h: 4,
-    booked24h: 1,
+    hoursSaved: 7.5,
+    proposalsDrafted: 12,
+    reportsSent: 4,
+    approvalsNeeded: 2,
   });
   const [tasksData, setTasksData] = React.useState(MOCK_TASKS);
   const [leadsData, setLeadsData] = React.useState(MOCK_LEADS);
@@ -214,7 +197,7 @@ export default function ClientPortalDashboard() {
     );
   }, [searchQuery, tasksData]);
 
-  const leads = React.useMemo(() => {
+  const engagements = React.useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return leadsData;
     return leadsData.filter(
@@ -255,7 +238,6 @@ export default function ClientPortalDashboard() {
       settings?: {
         industry?: string | null;
         location?: string | null;
-        max_outreach_per_day?: number | null;
         approval_required?: boolean | null;
         exclude_keywords?: string | null;
         offer_focus?: string | null;
@@ -271,10 +253,10 @@ export default function ClientPortalDashboard() {
         if (data?.empty) return;
         if (data?.metrics) {
           setMetrics({
-            leads24h: data.metrics.leads24h ?? 0,
-            queued24h: data.metrics.queued24h ?? 0,
-            replies24h: data.metrics.replies24h ?? 0,
-            booked24h: data.metrics.booked24h ?? 0,
+            hoursSaved: Math.max(0, (data.metrics.replies24h ?? 0) * 1.5),
+            proposalsDrafted: data.metrics.leads24h ?? 0,
+            reportsSent: data.metrics.booked24h ?? 0,
+            approvalsNeeded: data.metrics.queued24h ?? 0,
           });
         }
         if (Array.isArray(data?.tasks) && data.tasks.length > 0) {
@@ -310,7 +292,6 @@ export default function ClientPortalDashboard() {
         if (data?.settings) {
           setIndustry(data.settings.industry ?? industry);
           setLocation(data.settings.location ?? location);
-          setMaxOutreach(String(data.settings.max_outreach_per_day ?? maxOutreach));
           setApprovalRequired(Boolean(data.settings.approval_required ?? approvalRequired));
           setExcludeKeywords(data.settings.exclude_keywords ?? excludeKeywords);
           setOfferFocus(data.settings.offer_focus ?? offerFocus);
@@ -336,7 +317,6 @@ export default function ClientPortalDashboard() {
         body: JSON.stringify({
           industry,
           location,
-          max_outreach_per_day: Number(maxOutreach) || 0,
           approval_required: approvalRequired,
           exclude_keywords: excludeKeywords,
           offer_focus: offerFocus,
@@ -357,14 +337,14 @@ export default function ClientPortalDashboard() {
             <div className="logo" />
             <div>
               <h1>Temporary Utopia</h1>
-              <span>Client Portal • Prototype</span>
+              <span>Client Portal</span>
             </div>
           </div>
 
           <div className="search">
             <Search className="h-4 w-4 text-white/70" />
             <input
-              placeholder="Search tasks, leads, companies…"
+              placeholder="Search operators, work log, engagements…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -372,13 +352,9 @@ export default function ClientPortalDashboard() {
           </div>
 
           <div className="top-actions">
-            <button
-              className="pill"
-              type="button"
-              onClick={() => setAgentRunning((prev) => !prev)}
-            >
+            <button className="pill" type="button" onClick={() => setAgentRunning((prev) => !prev)}>
               <span className={`dot ${agentRunning ? "good" : "bad"}`} />
-              {agentRunning ? "Agent Running" : "Agent Paused"}
+              {agentRunning ? "Operators Running" : "Operators Paused"}
             </button>
             <button className="pill" type="button">
               <Bell className="h-4 w-4" />
@@ -398,8 +374,8 @@ export default function ClientPortalDashboard() {
             </div>
             <div className="side-sub">
               <span className="chip">Proof of work</span>
-              <span className="chip">Daily runs</span>
-              <span className="chip">Safe settings</span>
+              <span className="chip">Engagements</span>
+              <span className="chip">Reports</span>
             </div>
           </div>
           <nav className="nav">
@@ -410,37 +386,30 @@ export default function ClientPortalDashboard() {
               onClick={() => setActiveNav("overview")}
             />
             <NavItem
-              active={activeNav === "tasks"}
-              label="Work Log (Tasks)"
+              active={activeNav === "work"}
+              label="Work log"
               icon={<FileText className="h-4 w-4" />}
               right={<span className="count">28</span>}
-              onClick={() => setActiveNav("tasks")}
+              onClick={() => setActiveNav("work")}
             />
             <NavItem
-              active={activeNav === "leads"}
-              label="Leads"
+              active={activeNav === "engagements"}
+              label="Engagements"
               icon={<Target className="h-4 w-4" />}
-              right={<span className="count">146</span>}
-              onClick={() => setActiveNav("leads")}
+              right={<span className="count">14</span>}
+              onClick={() => setActiveNav("engagements")}
             />
             <NavItem
-              active={activeNav === "outreach"}
-              label="Outreach"
-              icon={<MessageSquare className="h-4 w-4" />}
-              right={<span className="count">12</span>}
-              onClick={() => setActiveNav("outreach")}
+              active={activeNav === "reports"}
+              label="Reports"
+              icon={<LineChart className="h-4 w-4" />}
+              onClick={() => setActiveNav("reports")}
             />
             <NavItem
-              active={activeNav === "schedule"}
-              label="Schedule"
-              icon={<CalendarDays className="h-4 w-4" />}
-              onClick={() => setActiveNav("schedule")}
-            />
-            <NavItem
-              active={activeNav === "settings"}
-              label="Agent Settings"
-              icon={<Settings className="h-4 w-4" />}
-              onClick={() => setActiveNav("settings")}
+              active={activeNav === "integrations"}
+              label="Integrations"
+              icon={<Plug className="h-4 w-4" />}
+              onClick={() => setActiveNav("integrations")}
             />
             <NavItem
               active={activeNav === "support"}
@@ -455,32 +424,32 @@ export default function ClientPortalDashboard() {
           <section className="hero">
             <div className="hero-grid">
               <div className="h-title">
-                <h3>Welcome back 👋</h3>
+                <h3>Operator overview</h3>
                 <p>
-                  This is your client portal — the place you check to see what the agent has done,
-                  what it’s doing next, and what’s working.
+                  This is your operational view — what the operators have done, what’s waiting approval,
+                  and where billable time is being protected.
                 </p>
                 <div className="cta-row">
                   <button className="btn primary">
-                    <Sparkles className="h-4 w-4" /> Request a lead push now
+                    <Sparkles className="h-4 w-4" /> Request operator upgrade
                   </button>
                   <button className="btn">
-                    <Target className="h-4 w-4" /> Add a target profile
+                    <FileText className="h-4 w-4" /> View work log
                   </button>
-                  <button className="btn danger">
-                    <PauseCircle className="h-4 w-4" /> Pause outreach
+                  <button className="btn">
+                    <LineChart className="h-4 w-4" /> View report
                   </button>
                 </div>
               </div>
               <div className="card" style={{ background: "rgba(255,255,255,0.04)" }}>
-                <div className="k">Agent status</div>
+                <div className="k">Operator status</div>
                 <div className="v">{agentRunning ? "Running" : "Paused"}</div>
                 <div className="s">
                   <span className={`tag-pill ${agentRunning ? "good" : "bad"}`}>
                     <i /> {agentRunning ? "Healthy" : "Paused"}
                   </span>
                   <span className="mono">
-                    <Clock className="h-3 w-3" /> Last run: 09:12 AM
+                    <Clock className="h-3 w-3" /> Last run: 08:30 AM
                   </span>
                 </div>
                 <div className="spark">
@@ -490,33 +459,33 @@ export default function ClientPortalDashboard() {
             </div>
             <div className="cards">
               <div className="card">
-                <div className="k">Leads found (24h)</div>
-                <div className="v">{metrics.leads24h}</div>
-                <div className="s">Captured in last 24h</div>
+                <div className="k">Billable time saved</div>
+                <div className="v">{metrics.hoursSaved} hrs</div>
+                <div className="s">Estimated weekly gain</div>
                 <div className="spark">
                   <i style={{ width: "68%" }} />
                 </div>
               </div>
               <div className="card">
-                <div className="k">Messages queued</div>
-                <div className="v">{metrics.queued24h}</div>
-                <div className="s">Waiting approval</div>
+                <div className="k">Proposals drafted</div>
+                <div className="v">{metrics.proposalsDrafted}</div>
+                <div className="s">This month</div>
                 <div className="spark">
-                  <i style={{ width: "42%" }} />
+                  <i style={{ width: "52%" }} />
                 </div>
               </div>
               <div className="card">
-                <div className="k">Replies</div>
-                <div className="v">{metrics.replies24h}</div>
-                <div className="s">Inbound replies</div>
+                <div className="k">Reports delivered</div>
+                <div className="v">{metrics.reportsSent}</div>
+                <div className="s">This month</div>
                 <div className="spark">
                   <i style={{ width: "36%" }} />
                 </div>
               </div>
               <div className="card">
-                <div className="k">Booked calls</div>
-                <div className="v">{metrics.booked24h}</div>
-                <div className="s">Confirmed</div>
+                <div className="k">Approvals needed</div>
+                <div className="v">{metrics.approvalsNeeded}</div>
+                <div className="s">Awaiting review</div>
                 <div className="spark">
                   <i style={{ width: "18%" }} />
                 </div>
@@ -529,11 +498,11 @@ export default function ClientPortalDashboard() {
               <div className="panel">
                 <div className="panel-head">
                   <div>
-                    <h4>Work Log (last 7 days)</h4>
-                    <p>Proof-of-work timeline. Click a task to see exactly what the agent did.</p>
+                    <h4>Work log (last 7 days)</h4>
+                    <p>Proof-of-work timeline. Click a task to see exactly what ran.</p>
                   </div>
                   <div className="right-actions">
-                    <span className="tag-pill">All sources</span>
+                    <span className="tag-pill">All operators</span>
                     <span className="tag-pill">Last 7 days</span>
                     <button className="btn">View all</button>
                   </div>
@@ -545,7 +514,7 @@ export default function ClientPortalDashboard() {
                         <tr>
                           <th className="th">When</th>
                           <th className="th">Task</th>
-                          <th className="th">Source</th>
+                          <th className="th">Operator</th>
                           <th className="th">Output</th>
                           <th className="th">Status</th>
                         </tr>
@@ -578,8 +547,7 @@ export default function ClientPortalDashboard() {
                     </table>
                   </div>
                   <div className="note">
-                    Design intention: tasks are the “source of truth”. Everything else (leads,
-                    outreach, reports) is derived from task outputs.
+                    Keep this page tight: operators, work log, outcomes, and reporting. Everything else stays hidden.
                   </div>
                 </div>
               </div>
@@ -587,11 +555,11 @@ export default function ClientPortalDashboard() {
               <div className="panel">
                 <div className="panel-head">
                   <div>
-                    <h4>Daily schedule</h4>
-                    <p>What’s set to run automatically. Keep it simple — change only what matters.</p>
+                    <h4>Integrations health</h4>
+                    <p>Connected systems with safe permissions.</p>
                   </div>
                   <div className="right-actions">
-                    <button className="btn">Edit schedule</button>
+                    <button className="btn">Review access</button>
                   </div>
                 </div>
                 <div className="panel-body">
@@ -599,33 +567,33 @@ export default function ClientPortalDashboard() {
                     <div className="row" style={{ borderRadius: "18px" }}>
                       <div className="row-inner">
                         <div>
-                          <div style={{ fontWeight: 700 }}>Morning lead sweep</div>
-                          <div className="help">Runs daily at 9:00 AM • Finds 10–20 leads</div>
+                          <div style={{ fontWeight: 700 }}>Google Workspace</div>
+                          <div className="help">Read access + drafts only</div>
                         </div>
                         <span className="tag-pill good">
-                          <i /> Active
+                          <i /> Healthy
                         </span>
                       </div>
                     </div>
                     <div className="row" style={{ borderRadius: "18px" }}>
                       <div className="row-inner">
                         <div>
-                          <div style={{ fontWeight: 700 }}>Outreach drafting</div>
-                          <div className="help">Runs daily at 6:30 PM • Requires approval</div>
+                          <div style={{ fontWeight: 700 }}>CRM</div>
+                          <div className="help">Write access to opportunities</div>
                         </div>
                         <span className="tag-pill warn">
-                          <i /> Approval
+                          <i /> Needs review
                         </span>
                       </div>
                     </div>
                     <div className="row" style={{ borderRadius: "18px" }}>
                       <div className="row-inner">
                         <div>
-                          <div style={{ fontWeight: 700 }}>Weekly report</div>
-                          <div className="help">Runs Friday at 5:00 PM • Summary + metrics</div>
+                          <div style={{ fontWeight: 700 }}>Reporting folder</div>
+                          <div className="help">Weekly exports + client updates</div>
                         </div>
-                        <span className="tag-pill bad">
-                          <i /> Needs fix
+                        <span className="tag-pill good">
+                          <i /> Healthy
                         </span>
                       </div>
                     </div>
@@ -636,7 +604,7 @@ export default function ClientPortalDashboard() {
                   <div className="panel" style={{ boxShadow: "none", background: "rgba(255,255,255,0.02)" }}>
                     <div className="panel-head" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
                       <div>
-                        <h4>Agent Settings (safe)</h4>
+                        <h4>Operator settings (safe)</h4>
                         <p>Client-configurable controls. Everything else stays locked.</p>
                       </div>
                     </div>
@@ -644,79 +612,49 @@ export default function ClientPortalDashboard() {
                       <div className="form">
                         <div className="row2">
                           <div className="field">
-                            <div className="label">Target industry</div>
-                            <select
-                              className="select"
-                              value={industry}
-                              onChange={(e) => setIndustry(e.target.value)}
-                            >
-                              <option>Cosmetic clinics</option>
-                              <option>Dental clinics</option>
-                              <option>Real estate agencies</option>
-                              <option>Trades & construction</option>
+                            <div className="label">Industry focus</div>
+                            <select className="select" value={industry} onChange={(e) => setIndustry(e.target.value)}>
+                              <option>Professional services</option>
+                              <option>Consulting & advisory</option>
+                              <option>Agencies</option>
+                              <option>Legal</option>
                             </select>
                           </div>
                           <div className="field">
                             <div className="label">Location</div>
-                            <input
-                              className="input"
-                              value={location}
-                              onChange={(e) => setLocation(e.target.value)}
-                            />
+                            <input className="input" value={location} onChange={(e) => setLocation(e.target.value)} />
                           </div>
                         </div>
                         <div className="row2">
                           <div className="field">
-                            <div className="label">Max outreach per day</div>
-                            <input
-                              className="input"
-                              value={maxOutreach}
-                              onChange={(e) => setMaxOutreach(e.target.value)}
-                            />
-                          </div>
-                          <div className="field">
                             <div className="label">Approval required</div>
                             <div className="select" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                               <span>{approvalRequired ? "Yes — review before sending" : "No — auto-send"}</span>
-                              <button
-                                className="btn"
-                                type="button"
-                                onClick={() => setApprovalRequired((v) => !v)}
-                              >
+                              <button className="btn" type="button" onClick={() => setApprovalRequired((v) => !v)}>
                                 Toggle
                               </button>
                             </div>
                           </div>
+                          <div className="field">
+                            <div className="label">Exclude keywords</div>
+                            <input className="input" value={excludeKeywords} onChange={(e) => setExcludeKeywords(e.target.value)} />
+                          </div>
                         </div>
                         <div className="field">
-                          <div className="label">Exclude keywords</div>
-                          <input
-                            className="input"
-                            value={excludeKeywords}
-                            onChange={(e) => setExcludeKeywords(e.target.value)}
-                          />
-                          <div className="help">Prevents low-fit leads from being added to your list.</div>
-                        </div>
-                        <div className="field">
-                          <div className="label">Offer focus (what the agent should pitch)</div>
-                          <textarea
-                            className="textarea"
-                            value={offerFocus}
-                            onChange={(e) => setOfferFocus(e.target.value)}
-                          />
+                          <div className="label">Operator focus</div>
+                          <textarea className="textarea" value={offerFocus} onChange={(e) => setOfferFocus(e.target.value)} />
                         </div>
                         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                           <button className="btn primary" onClick={saveSettings} disabled={saving}>
                             {saving ? "Saving..." : "Save settings"}
                           </button>
                           <button className="btn">
-                            Preview targeting <ExternalLink className="h-4 w-4" />
+                            Review access <ExternalLink className="h-4 w-4" />
                           </button>
                         </div>
                       </div>
                       <div className="note">
-                        Design intention: this settings area should feel like “tuning a car” — not configuring a server.
-                        Clients can change direction, but they can’t break the system.
+                        You can adjust direction without breaking the system. Everything critical stays locked.
                       </div>
                     </div>
                   </div>
@@ -725,18 +663,18 @@ export default function ClientPortalDashboard() {
             </section>
           )}
 
-          {activeNav === "leads" && (
+          {activeNav === "engagements" && (
             <section className="panel">
               <div className="panel-head">
                 <div>
-                  <h4>Leads preview</h4>
-                  <p>A quick look at the newest leads the agent added.</p>
+                  <h4>Engagements</h4>
+                  <p>A quick view of active client work and operator actions.</p>
                 </div>
                 <div className="right-actions">
                   <button className="btn">
-                    <Download className="h-4 w-4" /> Export CSV
+                    <CalendarDays className="h-4 w-4" /> Book a review
                   </button>
-                  <button className="btn">View all leads</button>
+                  <button className="btn">View all</button>
                 </div>
               </div>
               <div className="panel-body">
@@ -744,15 +682,15 @@ export default function ClientPortalDashboard() {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th className="th">Company</th>
+                        <th className="th">Client</th>
                         <th className="th">Channel</th>
-                        <th className="th">Fit score</th>
-                        <th className="th">Reason</th>
+                        <th className="th">Health</th>
+                        <th className="th">Status</th>
                         <th className="th">Origin task</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {leads.map((lead) => (
+                      {engagements.map((lead) => (
                         <tr key={lead.id} className="row">
                           <td>
                             <strong>{lead.company}</strong>
@@ -775,12 +713,12 @@ export default function ClientPortalDashboard() {
             </section>
           )}
 
-          {activeNav === "tasks" && (
+          {activeNav === "work" && (
             <section className="panel">
               <div className="panel-head">
                 <div>
-                  <h4>Work Log</h4>
-                  <p>All tasks executed by the agent.</p>
+                  <h4>Work log</h4>
+                  <p>All operator runs and outputs.</p>
                 </div>
               </div>
               <div className="panel-body">
@@ -790,7 +728,7 @@ export default function ClientPortalDashboard() {
                       <tr>
                         <th className="th">When</th>
                         <th className="th">Task</th>
-                        <th className="th">Source</th>
+                        <th className="th">Operator</th>
                         <th className="th">Output</th>
                         <th className="th">Status</th>
                       </tr>
@@ -814,15 +752,17 @@ export default function ClientPortalDashboard() {
             </section>
           )}
 
-          {activeNav === "schedule" && (
+          {activeNav === "reports" && (
             <section className="panel">
               <div className="panel-head">
                 <div>
-                  <h4>Daily schedule</h4>
-                  <p>Loops and automated runs.</p>
+                  <h4>Reports</h4>
+                  <p>Weekly summaries and monthly performance snapshots.</p>
                 </div>
                 <div className="right-actions">
-                  <button className="btn">Edit schedule</button>
+                  <button className="btn">
+                    <Download className="h-4 w-4" /> Download latest
+                  </button>
                 </div>
               </div>
               <div className="panel-body">
@@ -830,33 +770,22 @@ export default function ClientPortalDashboard() {
                   <div className="row" style={{ borderRadius: "18px" }}>
                     <div className="row-inner">
                       <div>
-                        <div style={{ fontWeight: 700 }}>Morning lead sweep</div>
-                        <div className="help">Runs daily at 9:00 AM • Finds 10–20 leads</div>
+                        <div style={{ fontWeight: 700 }}>Weekly summary — 1 Mar</div>
+                        <div className="help">Hours saved, proposals drafted, reports delivered</div>
                       </div>
                       <span className="tag-pill good">
-                        <i /> Active
+                        <i /> Ready
                       </span>
                     </div>
                   </div>
                   <div className="row" style={{ borderRadius: "18px" }}>
                     <div className="row-inner">
                       <div>
-                        <div style={{ fontWeight: 700 }}>Outreach drafting</div>
-                        <div className="help">Runs daily at 6:30 PM • Requires approval</div>
+                        <div style={{ fontWeight: 700 }}>Monthly performance — February</div>
+                        <div className="help">Operator ROI + client outcomes</div>
                       </div>
                       <span className="tag-pill warn">
-                        <i /> Approval
-                      </span>
-                    </div>
-                  </div>
-                  <div className="row" style={{ borderRadius: "18px" }}>
-                    <div className="row-inner">
-                      <div>
-                        <div style={{ fontWeight: 700 }}>Weekly report</div>
-                        <div className="help">Runs Friday at 5:00 PM • Summary + metrics</div>
-                      </div>
-                      <span className="tag-pill bad">
-                        <i /> Needs fix
+                        <i /> Drafting
                       </span>
                     </div>
                   </div>
@@ -865,111 +794,31 @@ export default function ClientPortalDashboard() {
             </section>
           )}
 
-          {activeNav === "settings" && (
+          {activeNav === "integrations" && (
             <section className="panel">
               <div className="panel-head">
                 <div>
-                  <h4>Agent Settings (safe)</h4>
-                  <p>Client-configurable controls. Everything else stays locked.</p>
+                  <h4>Integrations</h4>
+                  <p>Connected systems and permission scope.</p>
                 </div>
               </div>
               <div className="panel-body">
                 <div className="form">
-                  <div className="row2">
-                    <div className="field">
-                      <div className="label">Target industry</div>
-                      <select
-                        className="select"
-                        value={industry}
-                        onChange={(e) => setIndustry(e.target.value)}
-                      >
-                        <option>Cosmetic clinics</option>
-                        <option>Dental clinics</option>
-                        <option>Real estate agencies</option>
-                        <option>Trades & construction</option>
-                      </select>
-                    </div>
-                    <div className="field">
-                      <div className="label">Location</div>
-                      <input
-                        className="input"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="row2">
-                    <div className="field">
-                      <div className="label">Max outreach per day</div>
-                      <input
-                        className="input"
-                        value={maxOutreach}
-                        onChange={(e) => setMaxOutreach(e.target.value)}
-                      />
-                    </div>
-                    <div className="field">
-                      <div className="label">Approval required</div>
-                      <div className="select" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                        <span>{approvalRequired ? "Yes — review before sending" : "No — auto-send"}</span>
-                        <button
-                          className="btn"
-                          type="button"
-                          onClick={() => setApprovalRequired((v) => !v)}
-                        >
-                          Toggle
-                        </button>
-                      </div>
-                    </div>
+                  <div className="field">
+                    <div className="label">Connected stack</div>
+                    <div className="help">Google Workspace · Slack · CRM · Calendar</div>
                   </div>
                   <div className="field">
-                    <div className="label">Exclude keywords</div>
-                    <input
-                      className="input"
-                      value={excludeKeywords}
-                      onChange={(e) => setExcludeKeywords(e.target.value)}
-                    />
-                    <div className="help">Prevents low-fit leads from being added to your list.</div>
-                  </div>
-                  <div className="field">
-                    <div className="label">Offer focus (what the agent should pitch)</div>
-                    <textarea
-                      className="textarea"
-                      value={offerFocus}
-                      onChange={(e) => setOfferFocus(e.target.value)}
-                    />
+                    <div className="label">Permissions</div>
+                    <div className="help">Read + draft access only. No direct sending without approval.</div>
                   </div>
                   <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                    <button className="btn primary">Save settings</button>
+                    <button className="btn">Review access</button>
                     <button className="btn">
-                      Preview targeting <ExternalLink className="h-4 w-4" />
-                    </button>
-                    <button className="btn">
-                      <Wand2 className="h-4 w-4" /> Improve targeting
+                      Request new integration <ExternalLink className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
-              </div>
-            </section>
-          )}
-
-          {activeNav === "outreach" && (
-            <section className="panel">
-              <div className="panel-head">
-                <div>
-                  <h4>Outreach</h4>
-                  <p>Approval inbox for queued messages.</p>
-                </div>
-                <div className="right-actions">
-                  <button className="btn">
-                    <Inbox className="h-4 w-4" /> Review queued messages
-                  </button>
-                  <button className="btn">
-                    <Filter className="h-4 w-4" /> Filters
-                  </button>
-                </div>
-              </div>
-              <div className="panel-body">
-                <div className="note">Hook this to queued_outreach and render approval cards here.</div>
               </div>
             </section>
           )}
@@ -996,7 +845,7 @@ export default function ClientPortalDashboard() {
           )}
 
           <div className="note">
-            Prototype only. Replace mock arrays with Supabase queries and wire buttons to real actions.
+            Portal focus: operators, work log, engagements, reports, and integrations. Keep everything else hidden.
           </div>
         </main>
       </div>
