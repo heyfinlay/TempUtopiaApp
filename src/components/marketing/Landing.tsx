@@ -16,10 +16,10 @@ import { SystemStepsCarousel } from "@/components/sections/SystemStepsCarousel"
 import { Button } from "@/components/marketing-ui/button"
 
 const navItems = [
-  { label: "System", href: "#system-diagram" },
-  { label: "Proof", href: "#demo-proof" },
-  { label: "Calculator", href: "#roi" },
-  { label: "Packages", href: "#packages" },
+  { label: "Operators", href: "#operators" },
+  { label: "Process", href: "#process" },
+  { label: "ROI", href: "#roi" },
+  { label: "Plans", href: "#plans" },
   { label: "FAQ", href: "#faq" },
 ]
 
@@ -41,7 +41,7 @@ export function Landing() {
   }
 
   const handleSecondaryCta = () => {
-    scrollTo("system-diagram")
+    scrollTo("operators")
   }
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -78,15 +78,16 @@ export function Landing() {
           </div>
           <div className="flex items-center gap-3">
             <Button asChild size="sm" variant="outline" className="hidden md:inline-flex">
-              <Link href="#system-diagram" onClick={(e) => handleNavClick(e, "#system-diagram")}>
-                See How It Works
+              <Link href="#operators" onClick={(e) => handleNavClick(e, "#operators")}
+              >
+                See Operators
               </Link>
             </Button>
             <Button asChild size="sm" variant="outline" className="hidden sm:inline-flex">
               <Link href="/login">Sign in</Link>
             </Button>
             <Button asChild size="sm">
-              <Link href="/login">Get Started</Link>
+              <Link href="#cta" onClick={(e) => handleNavClick(e, "#cta")}>Book Install Call</Link>
             </Button>
           </div>
         </nav>
@@ -94,8 +95,8 @@ export function Landing() {
 
       <main>
         <HeroSection onPrimaryClick={handlePrimaryCta} onSecondaryClick={handleSecondaryCta} />
-        <SystemStepsCarousel />
         <DemoProofSection />
+        <SystemStepsCarousel />
         <AdminAutomationCalculator />
         <ForWhoSection />
         <PackagesSection onBookAudit={handlePrimaryCta} />
@@ -131,10 +132,10 @@ export function Landing() {
               onClick={(e) => handleNavClick(e, "#cta")}
               className="rounded-md px-1 py-1 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
-              Book Audit
+              Book Install Call
             </a>
           </div>
-          <p className="text-xs text-slate-500">Automated lead systems that turn enquiries into booked calls.</p>
+          <p className="text-xs text-slate-500">We install AI operators inside consulting firms to protect billable time.</p>
         </div>
       </footer>
     </div>

@@ -11,28 +11,28 @@ import { Reveal } from "@/components/sections/Reveal"
 
 const systemSteps = [
   {
-    title: "A new enquiry comes in",
-    description: "Someone messages you, fills out a form, or calls your business.",
+    title: "Discovery + scope",
+    description: "Map where billable time leaks and decide the first two operators.",
   },
   {
-    title: "They get an instant reply",
-    description: "The system responds immediately, even if you’re busy or asleep.",
+    title: "Secure install",
+    description: "We connect OpenClaw to your existing tools with strict permissions.",
   },
   {
-    title: "It asks the right questions",
-    description: "It finds out what they need and whether they’re a good fit.",
+    title: "Workflow build",
+    description: "Operators are configured for your inbox, CRM, reporting cadence, and proposals.",
   },
   {
-    title: "It books them a time to talk",
-    description: "If they’re serious, it schedules a call straight into your calendar.",
+    title: "Guardrails",
+    description: "Human‑in‑the‑loop controls and approval points for client‑facing work.",
   },
   {
-    title: "It reminds them so they show up",
-    description: "Automatic reminders reduce no-shows and wasted time.",
+    title: "Handover",
+    description: "Your team gets trained, with clear operating rules and escalation paths.",
   },
   {
-    title: "You see everything in one place",
-    description: "Every lead, message, and result is tracked in a simple dashboard.",
+    title: "Optimisation",
+    description: "We tune performance and expand operators as your workload grows.",
   },
 ]
 
@@ -72,14 +72,14 @@ export function SystemStepsCarousel() {
   }, [])
 
   return (
-    <section id="system-diagram" className="relative py-24 md:py-28">
+    <section id="process" className="relative py-24 md:py-28">
       <div className="mx-auto max-w-6xl space-y-6 px-4 sm:px-6 lg:px-8">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">System Steps</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Here’s the system we install.</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Process</p>
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">How we install operators.</h2>
             <p className="max-w-2xl text-slate-600">
-              Swipe through the exact 6-step process that turns a new enquiry into a booked call.
+              A clear, fast install process — designed for professional services and low disruption.
             </p>
           </div>
           <div className="hidden items-center gap-2 md:flex">
@@ -112,7 +112,7 @@ export function SystemStepsCarousel() {
           <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700">
-                Lead → Booked Call
+                Install flow
               </Badge>
               <p className="text-sm text-slate-500 md:hidden">Swipe to explore</p>
             </div>

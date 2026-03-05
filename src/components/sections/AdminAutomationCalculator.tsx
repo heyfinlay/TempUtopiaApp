@@ -18,35 +18,34 @@ const currency = (value: number) =>
   })
 
 export function AdminAutomationCalculator() {
-  const [hoursPerWeek, setHoursPerWeek] = useState(12)
-  const [hourlyRate, setHourlyRate] = useState(55)
-  const [missedLeads, setMissedLeads] = useState(10)
-  const [avgDealValue, setAvgDealValue] = useState(1800)
-  const [closeRate, setCloseRate] = useState(20)
+  const [nonBillableHours, setNonBillableHours] = useState(10)
+  const [billableRate, setBillableRate] = useState(220)
+  const [proposalsPerMonth, setProposalsPerMonth] = useState(6)
+  const [hoursPerProposal, setHoursPerProposal] = useState(3)
   const [fullName, setFullName] = useState("")
   const [businessName, setBusinessName] = useState("")
   const [email, setEmail] = useState("")
 
-  const { adminCost, missedRevenue, totalOpportunity } = useMemo(() => {
-    const weeklyAdminCost = hoursPerWeek * hourlyRate
-    const monthlyAdminCost = weeklyAdminCost * 4.33
-    const revenueLeft = missedLeads * avgDealValue * (closeRate / 100)
+  const { lostBillable, proposalTime, totalOpportunity } = useMemo(() => {
+    const lostBillableMonthly = nonBillableHours * billableRate * 4.33
+    const proposalHoursMonthly = proposalsPerMonth * hoursPerProposal
+    const proposalValue = proposalHoursMonthly * billableRate
 
     return {
-      adminCost: monthlyAdminCost,
-      missedRevenue: revenueLeft,
-      totalOpportunity: monthlyAdminCost + revenueLeft,
+      lostBillable: lostBillableMonthly,
+      proposalTime: proposalValue,
+      totalOpportunity: lostBillableMonthly + proposalValue,
     }
-  }, [hoursPerWeek, hourlyRate, missedLeads, avgDealValue, closeRate])
+  }, [nonBillableHours, billableRate, proposalsPerMonth, hoursPerProposal])
 
   return (
     <section id="roi" className="relative py-24 md:py-28">
       <div className="mx-auto max-w-6xl space-y-10 px-4 sm:px-6 lg:px-8">
         <Reveal>
           <SectionIntro
-            eyebrow="Calculator"
-            title="See the cost of manual admin"
-            subtitle="A quick reality check on what slow follow-up and manual admin is costing you every month."
+            eyebrow="Billable Capacity"
+            title="See what admin is really costing"
+            subtitle="A quick estimate of billable time lost to inbox, reporting, and proposal work each month."
           />
         </Reveal>
 
@@ -59,54 +58,43 @@ export function AdminAutomationCalculator() {
               </CardHeader>
               <CardContent className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="hoursPerWeek">Admin hours per week</Label>
+                  <Label htmlFor="nonBillableHours">Non‑billable hours per week</Label>
                   <Input
-                    id="hoursPerWeek"
+                    id="nonBillableHours"
                     type="number"
                     min={0}
-                    value={hoursPerWeek}
-                    onChange={(event) => setHoursPerWeek(Number(event.target.value))}
+                    value={nonBillableHours}
+                    onChange={(event) => setNonBillableHours(Number(event.target.value))}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="hourlyRate">Hourly value of your time (AUD)</Label>
+                  <Label htmlFor="billableRate">Billable rate (AUD)</Label>
                   <Input
-                    id="hourlyRate"
+                    id="billableRate"
                     type="number"
                     min={0}
-                    value={hourlyRate}
-                    onChange={(event) => setHourlyRate(Number(event.target.value))}
+                    value={billableRate}
+                    onChange={(event) => setBillableRate(Number(event.target.value))}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="missedLeads">Leads slipping each month</Label>
+                  <Label htmlFor="proposalsPerMonth">Proposals per month</Label>
                   <Input
-                    id="missedLeads"
+                    id="proposalsPerMonth"
                     type="number"
                     min={0}
-                    value={missedLeads}
-                    onChange={(event) => setMissedLeads(Number(event.target.value))}
+                    value={proposalsPerMonth}
+                    onChange={(event) => setProposalsPerMonth(Number(event.target.value))}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="avgDealValue">Average deal value (AUD)</Label>
+                  <Label htmlFor="hoursPerProposal">Hours per proposal</Label>
                   <Input
-                    id="avgDealValue"
+                    id="hoursPerProposal"
                     type="number"
                     min={0}
-                    value={avgDealValue}
-                    onChange={(event) => setAvgDealValue(Number(event.target.value))}
-                  />
-                </div>
-                <div className="space-y-2 sm:col-span-2">
-                  <Label htmlFor="closeRate">Close rate (%)</Label>
-                  <Input
-                    id="closeRate"
-                    type="number"
-                    min={0}
-                    max={100}
-                    value={closeRate}
-                    onChange={(event) => setCloseRate(Number(event.target.value))}
+                    value={hoursPerProposal}
+                    onChange={(event) => setHoursPerProposal(Number(event.target.value))}
                   />
                 </div>
               </CardContent>
@@ -121,25 +109,25 @@ export function AdminAutomationCalculator() {
               </CardHeader>
               <CardContent className="space-y-5 text-sm text-slate-700">
                 <div className="rounded-xl border border-emerald-200/70 bg-white/90 p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Admin cost</p>
-                  <p className="text-2xl font-semibold text-slate-900">{currency(adminCost)}</p>
-                  <p className="mt-1 text-sm text-slate-600">Time spent on manual admin every month.</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Billable time lost</p>
+                  <p className="text-2xl font-semibold text-slate-900">{currency(lostBillable)}</p>
+                  <p className="mt-1 text-sm text-slate-600">Time absorbed by admin instead of delivery.</p>
                 </div>
                 <div className="rounded-xl border border-emerald-200/70 bg-white/90 p-4">
-                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Missed revenue</p>
-                  <p className="text-2xl font-semibold text-slate-900">{currency(missedRevenue)}</p>
-                  <p className="mt-1 text-sm text-slate-600">Leads that disappear when follow-up is slow.</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Proposal overhead</p>
+                  <p className="text-2xl font-semibold text-slate-900">{currency(proposalTime)}</p>
+                  <p className="mt-1 text-sm text-slate-600">Hours spent drafting and formatting proposals.</p>
                 </div>
                 <div className="rounded-xl border border-emerald-300/70 bg-emerald-600/10 p-4">
                   <p className="text-xs uppercase tracking-[0.2em] text-emerald-700">Total upside</p>
                   <p className="text-2xl font-semibold text-emerald-900">{currency(totalOpportunity)}</p>
-                  <p className="mt-1 text-sm text-emerald-700">What automation can unlock every month.</p>
+                  <p className="mt-1 text-sm text-emerald-700">What operators can return each month.</p>
                 </div>
 
                 <div className="rounded-2xl border border-emerald-200/70 bg-white/95 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Get the full breakdown</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Get a billable capacity estimate</p>
                   <p className="mt-1 text-sm text-slate-600">
-                    Leave your details and we’ll send the personalised estimate + next steps.
+                    Leave your details and we’ll send a short estimate tailored to your firm.
                   </p>
                   <div className="mt-4 grid gap-3">
                     <div className="grid gap-3 sm:grid-cols-2">
@@ -158,7 +146,7 @@ export function AdminAutomationCalculator() {
                           id="businessName"
                           value={businessName}
                           onChange={(event) => setBusinessName(event.target.value)}
-                          placeholder="Studio Aesthetics"
+                          placeholder="Cedar Consulting"
                         />
                       </div>
                     </div>
@@ -169,12 +157,12 @@ export function AdminAutomationCalculator() {
                         type="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        placeholder="you@clinic.com"
+                        placeholder="you@firm.com"
                       />
                     </div>
-                    <Button className="w-full">Send me the estimate</Button>
+                    <Button className="w-full">Send the estimate</Button>
                     <p className="text-xs text-slate-500">
-                      We’ll never spam. This just lets us send your personalised ROI breakdown.
+                      We’ll only send the estimate and next steps — no spam.
                     </p>
                   </div>
                 </div>

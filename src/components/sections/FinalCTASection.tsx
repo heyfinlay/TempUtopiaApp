@@ -20,22 +20,21 @@ export function FinalCTASection({ onPrimaryClick }: FinalCTASectionProps) {
         <div className="grid gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-start">
           <Reveal className="space-y-5">
             <Badge variant="outline" className="border-emerald-200 bg-emerald-50 text-emerald-700">
-              Book an Audit
+              Book an Install Call
             </Badge>
             <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-              Stop losing leads you already paid for.
+              Install operators that protect billable time.
             </h2>
             <p className="max-w-xl text-lg leading-relaxed text-slate-600">
-              This step-by-step audit booking flow takes one minute and gives you a clear action plan for faster follow-up and more
-              booked calls.
+              One short call to map your top two operator opportunities. If it’s a fit, we’ll scope the install and timeline.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button onClick={onPrimaryClick}>Start the audit flow</Button>
+              <Button onClick={onPrimaryClick}>Start the install call</Button>
             </div>
             <div className="space-y-2 text-sm text-slate-600">
-              <p>1. Choose business type and goal</p>
-              <p>2. Add contact details</p>
-              <p>3. Pick your booking preference and submit</p>
+              <p>1. Share your firm type and workflow priorities</p>
+              <p>2. Add your details</p>
+              <p>3. Choose your booking preference</p>
             </div>
           </Reveal>
 
@@ -43,10 +42,10 @@ export function FinalCTASection({ onPrimaryClick }: FinalCTASectionProps) {
             <LeadIntakeForm />
             <div className="rounded-xl border border-slate-200 bg-white p-4">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-medium text-slate-900">Want monthly playbooks?</span>
+                <span className="text-sm font-medium text-slate-900">Want practical operator notes?</span>
                 <Sparkles className="size-4 text-emerald-600" />
               </div>
-              <p className="mt-1 text-sm text-slate-600">One practical growth update each month.</p>
+              <p className="mt-1 text-sm text-slate-600">One short update each month.</p>
               <div className="mt-3">
                 <InsightsSignup compact />
               </div>

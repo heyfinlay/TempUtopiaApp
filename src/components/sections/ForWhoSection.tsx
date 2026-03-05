@@ -5,27 +5,27 @@ import { SectionIntro } from "@/components/sections/SectionIntro"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/marketing-ui/card"
 
 const perfectFor = [
-  "Clinics & health services",
-  "Trades & local service businesses",
-  "High-ticket service providers",
-  "Agencies and consultants",
-  "Real estate / finance / legal",
+  "Founder‑led consulting firms",
+  "Boutique agencies with real delivery work",
+  "Advisory practices with heavy reporting",
+  "Professional services under 10 staff",
+  "Teams drowning in inbox + proposals",
 ]
 
 const notIdealFor = [
-  "Businesses with no enquiry volume",
-  "People who want “more followers”",
-  "One-product stores with no sales process",
+  "Businesses with no client delivery",
+  "Teams that won’t change their workflows",
+  "Low‑value, high‑volume commodity sales",
 ]
 
 export function ForWhoSection() {
   return (
-    <section id="for-who" className="relative py-24 md:py-28">
+    <section id="fit" className="relative py-24 md:py-28">
       <div className="mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8">
         <Reveal>
           <SectionIntro
-            title="This is built for businesses that sell with conversations."
-            subtitle="If your business relies on enquiries turning into calls, this works extremely well."
+            title="Built for firms where billable time matters"
+            subtitle="If your revenue depends on delivery work, this creates immediate leverage."
             eyebrow="Who It’s For"
           />
         </Reveal>
@@ -33,7 +33,7 @@ export function ForWhoSection() {
           <Reveal>
             <Card className="border-slate-200/80 bg-white/90 shadow-[0_16px_36px_-24px_rgba(15,23,42,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200/80 hover:shadow-[0_24px_52px_-28px_rgba(16,185,129,0.32)]">
               <CardHeader>
-                <CardTitle className="text-slate-900">Perfect for</CardTitle>
+                <CardTitle className="text-slate-900">Great fit</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {perfectFor.map((item) => (

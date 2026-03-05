@@ -29,8 +29,22 @@ type WizardValues = {
 const totalSteps = 5
 const calendarUrl = "https://calendly.com"
 
-const businessTypes = ["Cosmetic Clinic", "Dental", "Real Estate", "Trades", "Other"]
-const primaryGoals = ["More leads", "More booked calls", "Less admin", "Better follow-up"]
+const businessTypes = [
+  "Management consultancy",
+  "Marketing / growth agency",
+  "Finance / advisory",
+  "Legal",
+  "IT / digital services",
+  "Other",
+]
+
+const primaryGoals = [
+  "Protect billable time",
+  "Faster proposals",
+  "Clean CRM",
+  "Reporting cadence",
+  "Reduce scope creep",
+]
 
 const bookingOptions: Array<{ value: WizardValues["bookingPreference"]; title: string; description: string }> = [
   {
@@ -46,10 +60,11 @@ const bookingOptions: Array<{ value: WizardValues["bookingPreference"]; title: s
 ]
 
 const goalToService: Record<string, string> = {
-  "More leads": "Lead Capture System",
-  "More booked calls": "Booking + Reminders",
-  "Less admin": "Follow-Up Automation",
-  "Better follow-up": "Follow-Up Automation",
+  "Protect billable time": "Operator Installation",
+  "Faster proposals": "Proposal Drafting Operator",
+  "Clean CRM": "CRM Operator",
+  "Reporting cadence": "Reporting Operator",
+  "Reduce scope creep": "Monitoring Operator",
 }
 
 const initialValues: WizardValues = {
@@ -100,11 +115,11 @@ export function LeadIntakeForm() {
     const nextErrors: Record<string, string> = {}
 
     if (currentStep === 1 && !values.businessType) {
-      nextErrors.businessType = "Please choose your business type."
+      nextErrors.businessType = "Please choose your firm type."
     }
 
     if (currentStep === 2 && !values.primaryGoal) {
-      nextErrors.primaryGoal = "Please choose your primary goal."
+      nextErrors.primaryGoal = "Please choose the main outcome."
     }
 
     if (currentStep === 3) {
@@ -142,7 +157,7 @@ export function LeadIntakeForm() {
     employees_range: "Not provided",
     ad_spend_range: "Not provided",
     primary_goal: values.primaryGoal,
-    services_interested: [goalToService[values.primaryGoal] ?? "Not sure (need audit)"],
+    services_interested: [goalToService[values.primaryGoal] ?? "Not sure (need install call)"],
     contact_name: values.contactName.trim(),
     email: values.email.trim(),
     phone: values.phone.trim(),
@@ -151,7 +166,7 @@ export function LeadIntakeForm() {
       values.bookingPreference === "share_times" && values.preferredTimes.trim()
         ? `Preferred call times: ${values.preferredTimes.trim()}`
         : undefined,
-    source: "audit_wizard",
+    source: "install_call_wizard",
     honeypot: values.honeypot,
   })
 
@@ -185,7 +200,7 @@ export function LeadIntakeForm() {
       }
 
       setStatus("success")
-      setMessage("Thanks. Your audit request is in. We will reach out shortly.")
+      setMessage("Thanks. Your install call request is in. We will reach out shortly.")
 
       if (values.bookingPreference === "redirect_calendar") {
         window.open(calendarUrl, "_blank", "noopener,noreferrer")
@@ -200,7 +215,7 @@ export function LeadIntakeForm() {
     <div className="space-y-5">
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Book an Audit</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Book an Install Call</p>
           <p className="text-sm font-medium text-slate-700">
             Step {step} of {totalSteps}
           </p>
@@ -244,7 +259,7 @@ export function LeadIntakeForm() {
           {step === 1 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">What type of business are you?</p>
+                <p className="text-base font-semibold text-slate-900">What type of firm are you?</p>
                 <p className="text-sm text-slate-600">Choose the closest option.</p>
               </div>
               <div className="grid gap-2">
@@ -275,8 +290,8 @@ export function LeadIntakeForm() {
           {step === 2 ? (
             <div className="space-y-4">
               <div>
-                <p className="text-base font-semibold text-slate-900">What is your main goal right now?</p>
-                <p className="text-sm text-slate-600">We will tailor the audit to this outcome.</p>
+                <p className="text-base font-semibold text-slate-900">What outcome matters most right now?</p>
+                <p className="text-sm text-slate-600">We’ll tailor the install to this.</p>
               </div>
               <div className="grid gap-2">
                 {primaryGoals.map((goal) => {
@@ -306,7 +321,7 @@ export function LeadIntakeForm() {
             <div className="space-y-4">
               <div>
                 <p className="text-base font-semibold text-slate-900">Your contact details</p>
-                <p className="text-sm text-slate-600">So we can send your audit plan.</p>
+                <p className="text-sm text-slate-600">So we can confirm the install call.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="wizard-business-name">Business name</Label>
@@ -314,7 +329,7 @@ export function LeadIntakeForm() {
                   id="wizard-business-name"
                   value={values.businessName}
                   onChange={(e) => setField("businessName", e.target.value)}
-                  placeholder="e.g. Midtown Dental"
+                  placeholder="e.g. Cedar Consulting"
                   aria-invalid={Boolean(errors.businessName)}
                 />
                 {errors.businessName ? <p className="text-sm text-red-600">{errors.businessName}</p> : null}
@@ -337,7 +352,7 @@ export function LeadIntakeForm() {
                   type="email"
                   value={values.email}
                   onChange={(e) => setField("email", e.target.value)}
-                  placeholder="you@company.com"
+                  placeholder="you@firm.com"
                   aria-invalid={Boolean(errors.email)}
                 />
                 {errors.email ? <p className="text-sm text-red-600">{errors.email}</p> : null}
@@ -349,7 +364,7 @@ export function LeadIntakeForm() {
                   type="tel"
                   value={values.phone}
                   onChange={(e) => setField("phone", e.target.value)}
-                  placeholder="+1 555 123 4567"
+                  placeholder="0400 000 000"
                   aria-invalid={Boolean(errors.phone)}
                 />
                 {errors.phone ? <p className="text-sm text-red-600">{errors.phone}</p> : null}
@@ -410,7 +425,7 @@ export function LeadIntakeForm() {
               </div>
               <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
                 <p>
-                  <span className="font-semibold text-slate-900">Business type:</span> {values.businessType}
+                  <span className="font-semibold text-slate-900">Firm type:</span> {values.businessType}
                 </p>
                 <p>
                   <span className="font-semibold text-slate-900">Primary goal:</span> {values.primaryGoal}

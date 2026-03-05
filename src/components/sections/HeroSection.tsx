@@ -15,30 +15,32 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
   return (
     <section id="hero" className="relative overflow-hidden bg-white py-24 md:py-28">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <Reveal className="space-y-8">
             <Badge variant="outline" className="border-emerald-200 bg-white/90 text-emerald-700 backdrop-blur-sm">
               Temporary Utopia
             </Badge>
             <div className="space-y-5">
               <h1 className="max-w-2xl text-4xl font-semibold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                Turn enquiries into booked calls — automatically.
+                We install AI operators inside consulting firms so founders protect billable time.
               </h1>
               <p className="max-w-xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-                We install an AI follow-up system that replies instantly, qualifies leads, and books appointments while you run your
-                business.
+                Not a SaaS tool. Not a dashboard. We install operators that execute work inside your existing systems — inbox,
+                proposals, CRM, reporting.
               </p>
-              <p className="text-sm font-medium text-slate-500">No contracts. No complicated software. Setup in days.</p>
+              <p className="text-sm font-medium text-slate-500">Configured in 7–10 days. No migration required.</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Button asChild className="h-11 px-5 text-base">
-                <Link href="/login">Get Started</Link>
+                <Link href="#cta" onClick={(e) => { e.preventDefault(); onPrimaryClick() }}>
+                  Book Install Call
+                </Link>
               </Button>
               <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" onClick={onSecondaryClick}>
-                See How It Works
+                See Operators
               </Button>
-              <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" onClick={onPrimaryClick}>
-                Book a Free Audit
+              <Button variant="outline" className="h-11 border-slate-200 px-5 text-base text-slate-900" asChild>
+                <Link href="/login">Client sign in</Link>
               </Button>
             </div>
           </Reveal>
@@ -48,19 +50,19 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               <CardHeader className="space-y-1 pb-4">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <MessageCircle className="size-4 text-emerald-600" />
-                  Lead message conversation
+                  Inbox Operator
                 </CardTitle>
-                <CardDescription className="text-slate-600">New lead on website chat</CardDescription>
+                <CardDescription className="text-slate-600">Daily briefing + action items</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="max-w-[85%] rounded-2xl rounded-bl-sm bg-slate-100 px-3 py-2 text-sm text-slate-700">
-                  Hi, can you help with this week?
+                  Inbox briefing — 8:30am
                 </div>
                 <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-                  Yes. We can help. Want to book a quick call?
+                  3 client replies needed · 2 proposal opportunities · 1 invoice issue
                 </div>
                 <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-emerald-50 px-3 py-2 text-sm text-emerald-900">
-                  Here are two times today.
+                  Suggested replies drafted below.
                 </div>
               </CardContent>
             </Card>
@@ -69,12 +71,12 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               <CardHeader className="space-y-1 pb-3">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <CalendarCheck2 className="size-4 text-emerald-600" />
-                  Booking confirmation
+                  Proposal Drafting Operator
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900">
-                  Call booked for Tuesday at 10:30 AM
+                  Draft proposal in 18 minutes · pricing breakdown attached
                 </div>
               </CardContent>
             </Card>
@@ -83,17 +85,17 @@ export function HeroSection({ onPrimaryClick, onSecondaryClick }: HeroSectionPro
               <CardHeader className="space-y-1 pb-3">
                 <CardTitle className="flex items-center gap-2 text-base text-slate-900">
                   <BarChart3 className="size-4 text-emerald-600" />
-                  Dashboard summary
+                  Operator Dashboard
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-slate-700">
                 <div className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2">
-                  <span>New enquiries</span>
-                  <span className="font-semibold text-slate-900">18</span>
+                  <span>Billable time protected</span>
+                  <span className="font-semibold text-slate-900">+7.5 hrs/week</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-slate-200 px-3 py-2">
-                  <span>Booked calls</span>
-                  <span className="font-semibold text-slate-900">9</span>
+                  <span>Proposals drafted</span>
+                  <span className="font-semibold text-slate-900">12</span>
                 </div>
               </CardContent>
             </Card>
